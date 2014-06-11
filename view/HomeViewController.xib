@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.11"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="testSwift" customModuleProvider="target">
+            <connections>
+                <outlet property="scrollView" destination="qEC-qC-4BF" id="0me-xD-3Qc"/>
+                <outlet property="tableView" destination="aLu-6F-dJm" id="PN2-dz-WU6"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qEC-qC-4BF">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="7Xg-Wj-oPI">
+                            <rect key="frame" x="0.0" y="0.0" width="480" height="400"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="289" id="Qgj-Yg-Pn3"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="7Xg-Wj-oPI" secondAttribute="trailing" id="hJE-dd-4ZM"/>
+                        <constraint firstItem="7Xg-Wj-oPI" firstAttribute="leading" secondItem="qEC-qC-4BF" secondAttribute="leading" id="oSA-vY-G2W"/>
+                    </constraints>
+                </scrollView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="aLu-6F-dJm">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="69K-id-EBr"/>
+                        <outlet property="delegate" destination="-1" id="i5W-L3-F8L"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="qEC-qC-4BF" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="56p-RD-Axa"/>
+                <constraint firstAttribute="trailing" secondItem="qEC-qC-4BF" secondAttribute="trailing" id="91a-v9-VAu"/>
+                <constraint firstAttribute="trailing" secondItem="aLu-6F-dJm" secondAttribute="trailing" id="FVe-P2-LtI"/>
+                <constraint firstItem="aLu-6F-dJm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="PXL-th-Kbg"/>
+                <constraint firstAttribute="bottom" secondItem="aLu-6F-dJm" secondAttribute="bottom" id="cSC-Tx-679"/>
+                <constraint firstItem="aLu-6F-dJm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="sKJ-KB-VUI"/>
+                <constraint firstItem="qEC-qC-4BF" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="tSu-xe-KOm"/>
+                <constraint firstItem="qEC-qC-4BF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="uVf-u4-DIm"/>
+                <constraint firstAttribute="bottom" secondItem="qEC-qC-4BF" secondAttribute="bottom" id="w11-qv-AOt"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="AbstractSizeClassScreen[default]"/>
+            <point key="canvasLocation" x="-293" y="189"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="1.jpg" width="425" height="260"/>
+    </resources>
+</document>
