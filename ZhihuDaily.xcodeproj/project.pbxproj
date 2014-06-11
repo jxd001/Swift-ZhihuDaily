@@ -25,6 +25,7 @@
 		4D9173581948321E00E64BFB /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9173561948321E00E64BFB /* DetailViewController.swift */; };
 		4D9173591948321E00E64BFB /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D9173571948321E00E64BFB /* DetailViewController.xib */; };
 		4D91735B194848F600E64BFB /* shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D91735A194848F600E64BFB /* shadow.png */; };
+		4D91735D1948BA7600E64BFB /* SlideScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D91735C1948BA7600E64BFB /* SlideScrollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		4D9173561948321E00E64BFB /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		4D9173571948321E00E64BFB /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 		4D91735A194848F600E64BFB /* shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shadow.png; sourceTree = "<group>"; };
+		4D91735C1948BA7600E64BFB /* SlideScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				4D916F1119461B2600E64BFB /* UIViewExt.swift */,
 				4D916F1219461B2600E64BFB /* YRHttpRequest.swift */,
 				4D9173451946D7CB00E64BFB /* YYHRequest.swift */,
+				4D91735C1948BA7600E64BFB /* SlideScrollView.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 				4D916F1719461B2600E64BFB /* UIViewExt.swift in Sources */,
 				4D916F1619461B2600E64BFB /* UIImageViewWebExt.swift in Sources */,
 				4D916F1319461B2600E64BFB /* FileUtility.swift in Sources */,
+				4D91735D1948BA7600E64BFB /* SlideScrollView.swift in Sources */,
 				4D91733F1946AB1600E64BFB /* HomeViewController.swift in Sources */,
 				4D916F1819461B2600E64BFB /* YRHttpRequest.swift in Sources */,
 				4D916F1519461B2600E64BFB /* NSStringExt.swift in Sources */,

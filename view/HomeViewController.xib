@@ -19,7 +19,7 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qEC-qC-4BF">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="7Xg-Wj-oPI">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Xg-Wj-oPI">
                             <rect key="frame" x="0.0" y="0.0" width="480" height="400"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="289" id="Qgj-Yg-Pn3"/>
@@ -61,7 +61,4 @@
             <point key="canvasLocation" x="-293" y="189"/>
         </view>
     </objects>
-    <resources>
-        <image name="1.jpg" width="425" height="260"/>
-    </resources>
 </document>
