@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.11"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="testSwift" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="ZhihuDaily" customModuleProvider="target">
             <connections>
                 <outlet property="scrollView" destination="qEC-qC-4BF" id="0me-xD-3Qc"/>
                 <outlet property="tableView" destination="aLu-6F-dJm" id="PN2-dz-WU6"/>

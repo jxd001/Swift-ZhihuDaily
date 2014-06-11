@@ -29,7 +29,7 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.darkGrayColor();
+        self.view.backgroundColor = UIColor.darkGrayColor()
         
         var nib = UINib(nibName:"HomeViewCell", bundle: nil)
         self.tableView?.registerNib(nib, forCellReuseIdentifier: identifier)

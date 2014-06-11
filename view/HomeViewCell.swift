@@ -35,6 +35,7 @@ class HomeViewCell: UITableViewCell {
         
         var thumbArr = dic["images"] as NSArray
         var thumbUrl = thumbArr[0] as String
+        
         self.thumbImage.setImage(thumbUrl,placeHolder: UIImage(named: "avatar.png"))
     }
     

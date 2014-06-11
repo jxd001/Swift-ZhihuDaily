@@ -12,7 +12,11 @@ class DetailViewController: UIViewController,UIScrollViewDelegate {
     
     @IBOutlet var webView : UIWebView
     var aid:Int!
+    var topImage:UIImageView = UIImageView()
     var url = "http://news-at.zhihu.com/api/3/news/" as String
+    
+    let kImageHeight:Float = 400
+    let kInWindowHeight:Float = 200
 
     init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -44,12 +48,11 @@ class DetailViewController: UIViewController,UIScrollViewDelegate {
             if keys.containsObject("image")
             {
                 var imgUrl = data["image"] as String
-                var topImage:UIImageView = UIImageView()
-                topImage.frame = CGRect(origin: CGPoint(x: 0,y: 0),size: CGSize(width: 320,height: 200))
-                topImage.setImage(imgUrl,placeHolder: UIImage(named: "avatar.png"))
-                topImage.contentMode = UIViewContentMode.ScaleAspectFill
-                topImage.clipsToBounds = true
-                self.webView.scrollView.addSubview(topImage)
+                self.topImage.frame = CGRect(origin: CGPoint(x: 0,y: -100),size: CGSize(width: 320,height: 300))
+                self.topImage.setImage(imgUrl,placeHolder: UIImage(named: "avatar.png"))
+                self.topImage.contentMode = UIViewContentMode.ScaleAspectFill
+                self.topImage.clipsToBounds = true
+                self.webView.scrollView.addSubview(self.topImage)
                 
                 var shadowImg:UIImageView = UIImageView()
                 shadowImg.frame = CGRect(origin: CGPoint(x: 0,y: 120),size: CGSize(width: 320,height: 80))
@@ -91,23 +94,22 @@ class DetailViewController: UIViewController,UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView!)
     {
         var yOffset = self.webView.scrollView.contentOffset.y
-        println(yOffset)
         updateOffsets()
     }
     
     func updateOffsets() {
-//        var yOffset   = self.tableView.contentOffset.y;
-//        var threshold = kImageHeight - kInWindowHeight;
-//        
-//        if yOffset > -threshold && yOffset < 0 {
-//            self.scrollView.contentOffset = CGPointMake(0.0, floorf(yOffset / 2.0));
-//        }
-//        else if yOffset < 0 {
-//            self.scrollView.contentOffset = CGPointMake(0.0, yOffset + floorf(threshold / 2.0));
-//        }
-//        else {
-//            self.scrollView.contentOffset = CGPointMake(0.0, yOffset);
-//        }
+        var yOffset   = self.webView.scrollView.contentOffset.y
+        var threshold = kImageHeight - kInWindowHeight
+        
+        if yOffset > -threshold && yOffset < -64 {
+            self.topImage.frame = CGRect(origin: CGPoint(x: 0,y: -100+yOffset/2),size: CGSize(width: 320,height: 300-yOffset/2));
+        }
+        else if yOffset < -64 {
+            self.topImage.frame = CGRect(origin: CGPoint(x: 0,y: -100+yOffset/2),size: CGSize(width: 320,height: 300-yOffset/2));
+        }
+        else {
+            self.topImage.frame = CGRect(origin: CGPoint(x: 0,y: -100),size: CGSize(width: 320,height: 300));
+        }
     }
 
     
