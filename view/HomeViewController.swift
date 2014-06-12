@@ -12,10 +12,14 @@ import UIKit
 class HomeViewController: UIViewController {
 
     
+    @IBOutlet var imageView : UIImageView
     @IBOutlet var tableView : UITableView
     @IBOutlet var scrollView : UIScrollView
     
     var dataArray = NSMutableArray()
+    var slideImgArray = NSMutableArray()
+    var slideTtlArray = NSMutableArray()
+    
     let identifier = "cell"
     let url = "http://news-at.zhihu.com/api/3/news/latest"
     
@@ -56,7 +60,18 @@ class HomeViewController: UIViewController {
                 self.dataArray.addObject(data)
             }
             
+            var topArr = data["top_stories"] as NSArray
+            
+            for topData : AnyObject in topArr
+            {
+                var dic = topData as NSDictionary
+                var imgUrl = dic["image"] as String
+                self.slideImgArray.addObject(imgUrl)
+            }
+            
             self.tableView!.reloadData()
+            self.fillSlideScroll()
+
         })
         
     }
@@ -135,6 +150,16 @@ class HomeViewController: UIViewController {
         else {
             self.scrollView.contentOffset = CGPointMake(0.0, yOffset);
         }
+    }
+    
+    func fillSlideScroll() {
+        var slideRect = CGRect(origin:CGPoint(x:0,y:0),size:CGSize(width:self.imageView.frame.size.width,height:self.imageView.frame.size.height))
+
+        self.slideTtlArray = NSMutableArray(array:["111","222"])
+        var slideView = SlideScrollView()
+        slideView.initWithFrameRect(slideRect,imgArr:self.slideImgArray,titArr:self.slideTtlArray)
+        println(self.slideImgArray.count)
+        self.imageView.addSubview(slideView)
     }
 
     override func didReceiveMemoryWarning() {

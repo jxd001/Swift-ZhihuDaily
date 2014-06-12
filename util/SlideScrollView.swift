@@ -16,27 +16,15 @@ protocol EScrollerViewDelegate {
 
 class SlideScrollView: UIView,UIScrollViewDelegate {
 
-    var viewSize:CGRect
-    var scrollView:UIScrollView
-    var imageArray:NSArray
-    var titleArray:NSArray
-    var pageControl:UIPageControl
-    var currentPageIndex:Int
-    var noteTitle:UILabel
+    var viewSize:CGRect = CGRect()
+    var scrollView:UIScrollView = UIScrollView()
+    var imageArray:NSArray = NSArray()
+    var titleArray:NSArray = NSArray()
+    var pageControl:UIPageControl = UIPageControl()
+    var currentPageIndex:Int = 0
+    var noteTitle:UILabel = UILabel()
     
-    init(frame: CGRect) {
-        self.viewSize = CGRect()
-        self.scrollView = UIScrollView()
-        self.imageArray = NSArray()
-        self.titleArray = NSArray()
-        self.pageControl = UIPageControl()
-        self.currentPageIndex = 0
-        self.noteTitle = UILabel()
-        super.init(frame: frame)
-        // Initialization code
-       
-    }
-
+   
     func initWithFrameRect(rect:CGRect,imgArr:NSArray,titArr:NSArray)->AnyObject{
         
         self.userInteractionEnabled=true;
@@ -51,7 +39,7 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         scrollView.pagingEnabled = true;
         var contentWidth = 320*pageCount
 
-        scrollView.contentSize = CGSize(width:Float(contentWidth), height:viewSize.size.height)
+        scrollView.contentSize = CGSize(width:Float(1000), height:viewSize.size.height+1000)
         
         scrollView.showsHorizontalScrollIndicator = false;
         scrollView.showsVerticalScrollIndicator = false;
@@ -70,17 +58,19 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
             
             imgView.tag=i
             
-            var tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "imagePressed:")
+            var tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "imagePressed")
 
             tap.numberOfTapsRequired = 1
             tap.numberOfTouchesRequired = 1
-            imgView.userInteractionEnabled = true;
+            imgView.userInteractionEnabled = true
             imgView.addGestureRecognizer(tap)
             scrollView.addSubview(imgView)
         }
-//        [scrollView setContentOffset:CGPointMake(viewSize.size.width, 0)];
-//        [self addSubview:scrollView];
-//        
+        scrollView.contentOffset = CGPoint(x:viewSize.size.width, y:0)
+        
+        self.userInteractionEnabled = true
+        self.addSubview(scrollView)
+//
 //        //说明文字层
 //        float myHeight = height?height:34;
 //        
@@ -105,9 +95,51 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
 //        
 //        [self addSubview:noteView];
 //        
-//        [NSTimer scheduledTimerWithTimeInterval:SLIDETIME target:self selector:@selector(autoShowNextPage) userInfo:nil repeats:YES];
+        var timer:NSTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "autoShowNextPage", userInfo: nil, repeats: true)
+
 
         return self
     }
+    
+    func autoShowNextPage() {
+        println("111")
+        if pageControl.currentPage + 1 < titleArray.count {
+            currentPageIndex = pageControl.currentPage + 1
+            self.changeCurrentPage()
+        }else{
+            currentPageIndex = 0;
+            self.changeCurrentPage()
+        }
+    }
+    
+    func changeCurrentPage (){
+        var offX = scrollView.frame.size.width * Float(currentPageIndex+1)
+        scrollView.setContentOffset(CGPoint(x:offX, y:scrollView.frame.origin.y), animated:true)
+        self.scrollViewDidScroll(scrollView);
+    }
+    
+    func imagePressed () {
+        println("click")
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView!) {
+        var pageWidth:Int = Int(scrollView.frame.size.width)
+        var offX:Int = Int(scrollView.contentOffset.x)
+        var a = offX - pageWidth / 2 as Int
+        var b = a / pageWidth as Int
+        var c = floor(Double(b))
+        var page:Int = Int(c) + 1
+        currentPageIndex=page
+        pageControl.currentPage=(page-1)
+        var titleIndex=page-1
+        if (titleIndex==titleArray.count) {
+        titleIndex=0;
+        }
+        if (titleIndex<0) {
+        titleIndex=titleArray.count-1;
+        }
+//        [noteTitle setText:[titleArray objectAtIndex:titleIndex]];
+    }
+
 
 }

@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="ZhihuDaily" customModuleProvider="target">
             <connections>
+                <outlet property="imageView" destination="7Xg-Wj-oPI" id="cg0-Qs-bsY"/>
                 <outlet property="scrollView" destination="qEC-qC-4BF" id="0me-xD-3Qc"/>
                 <outlet property="tableView" destination="aLu-6F-dJm" id="PN2-dz-WU6"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -16,23 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qEC-qC-4BF">
-                    <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Xg-Wj-oPI">
-                            <rect key="frame" x="0.0" y="0.0" width="480" height="400"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="289" id="Qgj-Yg-Pn3"/>
-                            </constraints>
-                        </imageView>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="trailing" secondItem="7Xg-Wj-oPI" secondAttribute="trailing" id="hJE-dd-4ZM"/>
-                        <constraint firstItem="7Xg-Wj-oPI" firstAttribute="leading" secondItem="qEC-qC-4BF" secondAttribute="leading" id="oSA-vY-G2W"/>
-                    </constraints>
-                </scrollView>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="aLu-6F-dJm">
+                <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="aLu-6F-dJm">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
@@ -42,6 +27,23 @@
                         <outlet property="delegate" destination="-1" id="i5W-L3-F8L"/>
                     </connections>
                 </tableView>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qEC-qC-4BF">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                    <subviews>
+                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Xg-Wj-oPI">
+                            <rect key="frame" x="0.0" y="0.0" width="480" height="400"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="289" id="Qgj-Yg-Pn3"/>
+                                <constraint firstAttribute="width" constant="320" id="lJE-T6-XFP"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="7Xg-Wj-oPI" secondAttribute="trailing" id="hJE-dd-4ZM"/>
+                        <constraint firstItem="7Xg-Wj-oPI" firstAttribute="leading" secondItem="qEC-qC-4BF" secondAttribute="leading" id="oSA-vY-G2W"/>
+                    </constraints>
+                </scrollView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
