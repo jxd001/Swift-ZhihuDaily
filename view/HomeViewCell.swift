@@ -38,5 +38,4 @@ class HomeViewCell: UITableViewCell {
         
         self.thumbImage.setImage(thumbUrl,placeHolder: UIImage(named: "avatar.png"))
     }
-    
 }

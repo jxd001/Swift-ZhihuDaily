@@ -1,5 +1,5 @@
 //
-//  SlideScrollVoew.swift
+//  SlideScrollView.swift
 //  ZhihuDaily
 //
 //  Created by XuDong Jin on 14-6-12.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-protocol EScrollerViewDelegate {
+protocol SlideScrollViewDelegate {
     
-    func EScrollerViewDidClicked(index:Int)
+    func SlideScrollViewDidClicked(index:Int)
     
 }
 
@@ -24,6 +24,7 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
     var currentPageIndex:Int = 0
     var noteTitle:UILabel = UILabel()
     
+    var delegate:SlideScrollViewDelegate?
    
     func initWithFrameRect(rect:CGRect,imgArr:NSArray,titArr:NSArray)->AnyObject{
         
@@ -32,18 +33,21 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         var tempArray:NSMutableArray=NSMutableArray(array: imgArr);
         tempArray.insertObject(imgArr[imgArr.count-1], atIndex:0)
         tempArray.addObject(imgArr[0])
-        imageArray=NSArray(array:tempArray);
+        imageArray=NSArray(array:tempArray)
         titleArray=NSArray(array:titArr)
         viewSize=rect;
-        var pageCount:Int=imageArray.count;
+        var pageCount:Int=imageArray.count
         scrollView=UIScrollView(frame:CGRect(origin: CGPoint(x: 0,y: 0),size: CGSize(width: viewSize.size.width,height: viewSize.size.height)))
-        scrollView.pagingEnabled = true;
+        scrollView.pagingEnabled = true
         var contentWidth = 320*pageCount
         
-        scrollView.showsHorizontalScrollIndicator = false;
-        scrollView.showsVerticalScrollIndicator = false;
-        scrollView.scrollsToTop = false;
-        scrollView.delegate = self;
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.scrollEnabled = true
+        scrollView.pagingEnabled = true
+        scrollView.scrollsToTop = false
+        scrollView.delegate = self
+        
         for var i=0; i<pageCount; i++ {
             var imgURL:String=imageArray[i] as String
             var imgView:UIImageView=UIImageView()
@@ -52,22 +56,21 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
             imgView.frame = CGRect(origin: CGPoint(x: Float(viewWidth),y: 0),size: CGSize(width: viewSize.size.width,height: viewSize.size.height))
 
             imgView.setImage(imgURL,placeHolder: UIImage(named: "avatar.png"))
-            
             imgView.contentMode = UIViewContentMode.ScaleToFill
-            
-            imgView.tag=i
+            imgView.userInteractionEnabled = true
+
+            imgView.tag = i
             
             var tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "imagePressed")
 
             tap.numberOfTapsRequired = 1
             tap.numberOfTouchesRequired = 1
-            imgView.userInteractionEnabled = true
             imgView.addGestureRecognizer(tap)
             scrollView.addSubview(imgView)
         }
+        
         scrollView.contentOffset = CGPoint(x:viewSize.size.width, y:0)
         
-        self.userInteractionEnabled = true
         self.addSubview(scrollView)
 
         //文字层
@@ -103,7 +106,7 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         self.addSubview(noteView)
 
         var timer:NSTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "autoShowNextPage", userInfo: nil, repeats: true)
-
+        
         return self
     }
     
@@ -122,10 +125,6 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         var offX = scrollView.frame.size.width * Float(currentPageIndex+1)
         scrollView.setContentOffset(CGPoint(x:offX, y:scrollView.frame.origin.y), animated:true)
         self.scrollViewDidScroll(scrollView);
-    }
-    
-    func imagePressed () {
-        println("click")
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView!) {
@@ -152,6 +151,9 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         noteTitle.text = self.titleArray[titleIndex] as String
 
     }
-
+    
+    func imagePressed (tap:UITapGestureRecognizer){
+        delegate?.SlideScrollViewDidClicked(tap.view.tag)
+    }
 
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController,SlideScrollViewDelegate {
 
 
     @IBOutlet var tableView : UITableView
@@ -109,15 +109,14 @@ class HomeViewController: UIViewController {
             cell.backgroundColor = UIColor.clearColor()
             cell.contentView.backgroundColor = UIColor.clearColor()
             cell.selectionStyle = UITableViewCellSelectionStyle.None
-            cell.sep
             cell.clipsToBounds = true
             
             if self.slideImgArray.count > 0{
                 var slideRect = CGRect(origin:CGPoint(x:0,y:0),size:CGSize(width:320,height:kImageHeight))
                 
                 var slideView = SlideScrollView()
+                slideView.delegate = self
                 slideView.initWithFrameRect(slideRect,imgArr:self.slideImgArray,titArr:self.slideTtlArray)
-                println(self.slideImgArray.count)
                 cell.addSubview(slideView)
             }
         }
@@ -133,6 +132,7 @@ class HomeViewController: UIViewController {
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!)
     {
+        if indexPath!.section==0 {return}
         tableView.deselectRowAtIndexPath(indexPath!,animated: true)
         var index = indexPath!.row
         var data = self.dataArray[index] as NSDictionary
@@ -141,26 +141,12 @@ class HomeViewController: UIViewController {
         self.navigationController.pushViewController(detailCtrl, animated: true)
     }
     
-
-    func scrollViewDidScroll(scrollView: UIScrollView!)
+    func SlideScrollViewDidClicked(index:Int)
     {
-        var yOffset = self.tableView.contentOffset.y
-        updateOffsets()
-    }
-    
-    func updateOffsets() {
-        var yOffset   = self.tableView.contentOffset.y;
-        var threshold = kImageHeight - kInWindowHeight;
-    
-//        if yOffset > -threshold && yOffset < 0 {
-//            self.scrollView.contentOffset = CGPointMake(0.0, floorf(yOffset / 2.0));
-//        }
-//        else if yOffset < 0 {
-//            self.scrollView.contentOffset = CGPointMake(0.0, yOffset + floorf(threshold / 2.0));
-//        }
-//        else {
-//            self.scrollView.contentOffset = CGPointMake(0.0, yOffset);
-//        }
+        var data = self.dataArray[index] as NSDictionary
+        var detailCtrl = DetailViewController(nibName :"DetailViewController", bundle: nil)
+        detailCtrl.aid = data["id"] as Int
+        self.navigationController.pushViewController(detailCtrl, animated: true)
     }
     
     override func didReceiveMemoryWarning() {
