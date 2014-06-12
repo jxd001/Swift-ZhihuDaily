@@ -21,7 +21,6 @@
 		4D9173441946AC2000E64BFB /* HomeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D9173421946AC2000E64BFB /* HomeViewCell.xib */; };
 		4D9173461946D7CB00E64BFB /* YYHRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9173451946D7CB00E64BFB /* YYHRequest.swift */; };
 		4D91734D1947E83700E64BFB /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D91734C1947E83700E64BFB /* avatar.png */; };
-		4D9173531947F0F100E64BFB /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D9173521947F0F100E64BFB /* 1.jpg */; };
 		4D9173581948321E00E64BFB /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9173561948321E00E64BFB /* DetailViewController.swift */; };
 		4D9173591948321E00E64BFB /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D9173571948321E00E64BFB /* DetailViewController.xib */; };
 		4D91735B194848F600E64BFB /* shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D91735A194848F600E64BFB /* shadow.png */; };
@@ -45,7 +44,6 @@
 		4D9173421946AC2000E64BFB /* HomeViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewCell.xib; sourceTree = "<group>"; };
 		4D9173451946D7CB00E64BFB /* YYHRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YYHRequest.swift; sourceTree = "<group>"; };
 		4D91734C1947E83700E64BFB /* avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar.png; sourceTree = "<group>"; };
-		4D9173521947F0F100E64BFB /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
 		4D9173561948321E00E64BFB /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		4D9173571948321E00E64BFB /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 		4D91735A194848F600E64BFB /* shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shadow.png; sourceTree = "<group>"; };
@@ -129,7 +127,6 @@
 			isa = PBXGroup;
 			children = (
 				4D91735A194848F600E64BFB /* shadow.png */,
-				4D9173521947F0F100E64BFB /* 1.jpg */,
 				4D91734C1947E83700E64BFB /* avatar.png */,
 			);
 			path = resource;
@@ -216,7 +213,6 @@
 				4D91735B194848F600E64BFB /* shadow.png in Resources */,
 				4D9173441946AC2000E64BFB /* HomeViewCell.xib in Resources */,
 				4D916EEB1946151000E64BFB /* Images.xcassets in Resources */,
-				4D9173531947F0F100E64BFB /* 1.jpg in Resources */,
 				4D9173401946AB1600E64BFB /* HomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
