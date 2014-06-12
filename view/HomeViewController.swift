@@ -40,6 +40,9 @@ class HomeViewController: UIViewController {
         
         self.edgesForExtendedLayout = UIRectEdge.Top
         
+        self.scrollView.backgroundColor = UIColor.redColor()
+
+        
         loadData()
     }
     
@@ -67,6 +70,9 @@ class HomeViewController: UIViewController {
                 var dic = topData as NSDictionary
                 var imgUrl = dic["image"] as String
                 self.slideImgArray.addObject(imgUrl)
+                
+                var title = dic["title"] as String
+                self.slideTtlArray.addObject(title)
             }
             
             self.tableView!.reloadData()
@@ -155,7 +161,6 @@ class HomeViewController: UIViewController {
     func fillSlideScroll() {
         var slideRect = CGRect(origin:CGPoint(x:0,y:0),size:CGSize(width:self.imageView.frame.size.width,height:self.imageView.frame.size.height))
 
-        self.slideTtlArray = NSMutableArray(array:["111","222"])
         var slideView = SlideScrollView()
         slideView.initWithFrameRect(slideRect,imgArr:self.slideImgArray,titArr:self.slideTtlArray)
         println(self.slideImgArray.count)

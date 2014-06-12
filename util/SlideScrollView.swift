@@ -33,13 +33,14 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         tempArray.insertObject(imgArr[imgArr.count-1], atIndex:0)
         tempArray.addObject(imgArr[0])
         imageArray=NSArray(array:tempArray);
+        titleArray=NSArray(array:titArr)
         viewSize=rect;
         var pageCount:Int=imageArray.count;
         scrollView=UIScrollView(frame:CGRect(origin: CGPoint(x: 0,y: 0),size: CGSize(width: viewSize.size.width,height: viewSize.size.height)))
         scrollView.pagingEnabled = true;
         var contentWidth = 320*pageCount
 
-        scrollView.contentSize = CGSize(width:Float(1000), height:viewSize.size.height+1000)
+        scrollView.contentSize = CGSize(width:Float(contentWidth), height:viewSize.size.height+1000)
         
         scrollView.showsHorizontalScrollIndicator = false;
         scrollView.showsVerticalScrollIndicator = false;
@@ -70,39 +71,46 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         
         self.userInteractionEnabled = true
         self.addSubview(scrollView)
-//
-//        //说明文字层
-//        float myHeight = height?height:34;
-//        
-//        UIView *noteView=[[UIView alloc] initWithFrame:CGRectMake(0, self.bounds.size.height-myHeight,self.bounds.size.width,myHeight)];
-//        noteView.userInteractionEnabled = NO;
-//        [noteView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.3]];
-//        
-//        float pageControlWidth=(pageCount-2)*10.0f+40.f;
-//        float pagecontrolHeight=myHeight;
-//        pageControl=[[UIPageControl alloc]initWithFrame:CGRectMake((self.frame.size.width-pageControlWidth),0, pageControlWidth, pagecontrolHeight)];
-//        pageControl.currentPage=0;
-//        pageControl.numberOfPages=(pageCount-2);
-//        [noteView addSubview:pageControl];
-//        
-//        noteTitle.userInteractionEnabled = NO;
-//        noteTitle=[[UILabel alloc] initWithFrame:CGRectMake(5, 0, self.frame.size.width-pageControlWidth-15, myHeight)];
-//        [noteTitle setText:[titleArray objectAtIndex:0]];
-//        [noteTitle setBackgroundColor:[UIColor clearColor]];
-//        [noteTitle setFont:[UIFont systemFontOfSize:13]];
-//        [noteTitle setTextColor:[UIColor whiteColor]];
-//        [noteView addSubview:noteTitle];
-//        
-//        [self addSubview:noteView];
-//        
-        var timer:NSTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "autoShowNextPage", userInfo: nil, repeats: true)
 
+        //文字层
+        var myHeight:Float = 24;
+        
+        var shadowImg:UIImageView = UIImageView()
+        shadowImg.frame = CGRect(origin: CGPoint(x: 0,y: 170),size: CGSize(width: 320,height: 80))
+        shadowImg.image = UIImage(named:"shadow.png")
+        self.addSubview(shadowImg)
+        
+        var noteView:UIView = UIView(frame:CGRect(origin:CGPoint(x:0, y:self.viewSize.size.height-70),size:CGSize(width:320,height:myHeight)));
+        noteView.userInteractionEnabled = false;
+        noteView.backgroundColor = UIColor(red:0/255.0,green:0/255.0,blue:0/255.0,alpha:0)
+        
+        var pageControlWidth:Float = (Float(pageCount-2))*10.0+Float(40)
+        var pagecontrolHeight:Float = myHeight
+        
+        pageControl = UIPageControl(frame:CGRect(origin:CGPoint(x:self.viewSize.size.width/2-pageControlWidth/2, y:0),size:CGSize(width:pageControlWidth,height:pagecontrolHeight)))
+
+        pageControl.currentPage=0;
+        pageControl.numberOfPages=(pageCount-2);
+        noteView.addSubview(pageControl)
+        
+        noteTitle = UILabel()
+        noteTitle.textColor = UIColor.whiteColor()
+        noteTitle.font = UIFont.boldSystemFontOfSize(16)
+        noteTitle.numberOfLines = 0
+        noteTitle.lineBreakMode = NSLineBreakMode.ByCharWrapping
+        noteTitle.text = self.titleArray[0] as String
+        noteTitle.frame = CGRect(origin: CGPoint(x: 10,y: 170),size: CGSize(width: 300,height: 50))
+        self.addSubview(noteTitle)
+
+        self.addSubview(noteView)
+
+        var timer:NSTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "autoShowNextPage", userInfo: nil, repeats: true)
 
         return self
     }
     
     func autoShowNextPage() {
-        println("111")
+
         if pageControl.currentPage + 1 < titleArray.count {
             currentPageIndex = pageControl.currentPage + 1
             self.changeCurrentPage()
@@ -138,7 +146,8 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         if (titleIndex<0) {
         titleIndex=titleArray.count-1;
         }
-//        [noteTitle setText:[titleArray objectAtIndex:titleIndex]];
+        noteTitle.text = self.titleArray[titleIndex] as String
+
     }
 
 
