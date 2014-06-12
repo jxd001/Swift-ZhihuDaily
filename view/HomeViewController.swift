@@ -11,10 +11,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
-    
-    @IBOutlet var imageView : UIImageView
+
     @IBOutlet var tableView : UITableView
-    @IBOutlet var scrollView : UIScrollView
     
     var dataArray = NSMutableArray()
     var slideImgArray = NSMutableArray()
@@ -24,7 +22,7 @@ class HomeViewController: UIViewController {
     let url = "http://news-at.zhihu.com/api/3/news/latest"
     
     let kImageHeight:Float = 400
-    let kInWindowHeight:Float = 244
+    let kInWindowHeight:Float = 200
     
     init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -33,15 +31,12 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.darkGrayColor()
+        self.view.backgroundColor = UIColor.whiteColor()
         
         var nib = UINib(nibName:"HomeViewCell", bundle: nil)
         self.tableView?.registerNib(nib, forCellReuseIdentifier: identifier)
         
         self.edgesForExtendedLayout = UIRectEdge.Top
-        
-        self.scrollView.backgroundColor = UIColor.redColor()
-
         
         loadData()
     }
@@ -76,7 +71,6 @@ class HomeViewController: UIViewController {
             }
             
             self.tableView!.reloadData()
-            self.fillSlideScroll()
 
         })
         
@@ -115,6 +109,17 @@ class HomeViewController: UIViewController {
             cell.backgroundColor = UIColor.clearColor()
             cell.contentView.backgroundColor = UIColor.clearColor()
             cell.selectionStyle = UITableViewCellSelectionStyle.None
+            cell.sep
+            cell.clipsToBounds = true
+            
+            if self.slideImgArray.count > 0{
+                var slideRect = CGRect(origin:CGPoint(x:0,y:0),size:CGSize(width:320,height:kImageHeight))
+                
+                var slideView = SlideScrollView()
+                slideView.initWithFrameRect(slideRect,imgArr:self.slideImgArray,titArr:self.slideTtlArray)
+                println(self.slideImgArray.count)
+                cell.addSubview(slideView)
+            }
         }
         else{
             var c = tableView?.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as? HomeViewCell
@@ -147,26 +152,17 @@ class HomeViewController: UIViewController {
         var yOffset   = self.tableView.contentOffset.y;
         var threshold = kImageHeight - kInWindowHeight;
     
-        if yOffset > -threshold && yOffset < 0 {
-            self.scrollView.contentOffset = CGPointMake(0.0, floorf(yOffset / 2.0));
-        }
-        else if yOffset < 0 {
-            self.scrollView.contentOffset = CGPointMake(0.0, yOffset + floorf(threshold / 2.0));
-        }
-        else {
-            self.scrollView.contentOffset = CGPointMake(0.0, yOffset);
-        }
+//        if yOffset > -threshold && yOffset < 0 {
+//            self.scrollView.contentOffset = CGPointMake(0.0, floorf(yOffset / 2.0));
+//        }
+//        else if yOffset < 0 {
+//            self.scrollView.contentOffset = CGPointMake(0.0, yOffset + floorf(threshold / 2.0));
+//        }
+//        else {
+//            self.scrollView.contentOffset = CGPointMake(0.0, yOffset);
+//        }
     }
     
-    func fillSlideScroll() {
-        var slideRect = CGRect(origin:CGPoint(x:0,y:0),size:CGSize(width:self.imageView.frame.size.width,height:self.imageView.frame.size.height))
-
-        var slideView = SlideScrollView()
-        slideView.initWithFrameRect(slideRect,imgArr:self.slideImgArray,titArr:self.slideTtlArray)
-        println(self.slideImgArray.count)
-        self.imageView.addSubview(slideView)
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

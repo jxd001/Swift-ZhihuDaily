@@ -39,8 +39,6 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         scrollView=UIScrollView(frame:CGRect(origin: CGPoint(x: 0,y: 0),size: CGSize(width: viewSize.size.width,height: viewSize.size.height)))
         scrollView.pagingEnabled = true;
         var contentWidth = 320*pageCount
-
-        scrollView.contentSize = CGSize(width:Float(contentWidth), height:viewSize.size.height+1000)
         
         scrollView.showsHorizontalScrollIndicator = false;
         scrollView.showsVerticalScrollIndicator = false;
@@ -76,11 +74,11 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         var myHeight:Float = 24;
         
         var shadowImg:UIImageView = UIImageView()
-        shadowImg.frame = CGRect(origin: CGPoint(x: 0,y: 170),size: CGSize(width: 320,height: 80))
+        shadowImg.frame = CGRect(origin: CGPoint(x: 0,y: 130),size: CGSize(width: 320,height: 80))
         shadowImg.image = UIImage(named:"shadow.png")
         self.addSubview(shadowImg)
         
-        var noteView:UIView = UIView(frame:CGRect(origin:CGPoint(x:0, y:self.viewSize.size.height-70),size:CGSize(width:320,height:myHeight)));
+        var noteView:UIView = UIView(frame:CGRect(origin:CGPoint(x:0, y:170),size:CGSize(width:320,height:myHeight)));
         noteView.userInteractionEnabled = false;
         noteView.backgroundColor = UIColor(red:0/255.0,green:0/255.0,blue:0/255.0,alpha:0)
         
@@ -99,7 +97,7 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         noteTitle.numberOfLines = 0
         noteTitle.lineBreakMode = NSLineBreakMode.ByCharWrapping
         noteTitle.text = self.titleArray[0] as String
-        noteTitle.frame = CGRect(origin: CGPoint(x: 10,y: 170),size: CGSize(width: 300,height: 50))
+        noteTitle.frame = CGRect(origin: CGPoint(x: 10,y: 130),size: CGSize(width: 300,height: 50))
         self.addSubview(noteTitle)
 
         self.addSubview(noteView)
