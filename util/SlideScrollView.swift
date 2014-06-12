@@ -129,12 +129,17 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView!) {
+        //感觉swift算数运算的时候好麻烦啊，一个运算里必须要所有的值都保持一致才行，所以一个运算才变成了下面这一大段难看的代码，本来应该是这样的：
+        // var page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1
+        //应该是我没搞明白swift的真谛吧，我不相信有这么麻烦，求大神指教啊
+
         var pageWidth:Int = Int(scrollView.frame.size.width)
         var offX:Int = Int(scrollView.contentOffset.x)
         var a = offX - pageWidth / 2 as Int
         var b = a / pageWidth as Int
         var c = floor(Double(b))
         var page:Int = Int(c) + 1
+        
         currentPageIndex=page
         pageControl.currentPage=(page-1)
         var titleIndex=page-1
