@@ -14,6 +14,8 @@ protocol SlideScrollViewDelegate {
     
 }
 
+
+
 class SlideScrollView: UIView,UIScrollViewDelegate {
 
     var viewSize:CGRect = CGRect()
@@ -27,6 +29,8 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
     var delegate:SlideScrollViewDelegate?
    
     func initWithFrameRect(rect:CGRect,imgArr:NSArray,titArr:NSArray)->AnyObject{
+        
+        var view:UIView = UIView(frame:rect)
         
         self.userInteractionEnabled=true;
         
@@ -43,6 +47,7 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
+
         scrollView.scrollEnabled = true
         scrollView.pagingEnabled = true
         scrollView.scrollsToTop = false
@@ -61,7 +66,7 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
 
             imgView.tag = i
             
-            var tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "imagePressed")
+            var tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "imagePressed:")
 
             tap.numberOfTapsRequired = 1
             tap.numberOfTouchesRequired = 1

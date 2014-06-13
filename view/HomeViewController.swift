@@ -8,15 +8,16 @@
 
 import UIKit
 
-
 class HomeViewController: UIViewController,SlideScrollViewDelegate {
 
 
     @IBOutlet var tableView : UITableView
     
     var dataArray = NSMutableArray()
+    var slideArray = NSMutableArray()
     var slideImgArray = NSMutableArray()
     var slideTtlArray = NSMutableArray()
+    
     
     let identifier = "cell"
     let url = "http://news-at.zhihu.com/api/3/news/latest"
@@ -28,6 +29,7 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.title = "今日热闻"
     }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +61,7 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
             }
             
             var topArr = data["top_stories"] as NSArray
-            
+            self.slideArray = NSMutableArray(array:topArr)
             for topData : AnyObject in topArr
             {
                 var dic = topData as NSDictionary
@@ -100,7 +102,6 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
         }
     }
     
-    
     func tableView(tableView: UITableView?, cellForRowAtIndexPath indexPath: NSIndexPath?) -> UITableViewCell? {
         
         var cell:UITableViewCell
@@ -112,11 +113,13 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
             cell.clipsToBounds = true
             
             if self.slideImgArray.count > 0{
-                var slideRect = CGRect(origin:CGPoint(x:0,y:0),size:CGSize(width:320,height:kImageHeight))
+                var slideRect = CGRect(origin:CGPoint(x:0,y:0),size:CGSize(width:320,height:self.kImageHeight))
                 
-                var slideView = SlideScrollView()
+                var slideView = SlideScrollView(frame: slideRect)
                 slideView.delegate = self
                 slideView.initWithFrameRect(slideRect,imgArr:self.slideImgArray,titArr:self.slideTtlArray)
+//                self.view.addSubview(slideView)
+//                self.tableView.tableHeaderView = slideView
                 cell.addSubview(slideView)
             }
         }
@@ -143,7 +146,7 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
     
     func SlideScrollViewDidClicked(index:Int)
     {
-        var data = self.dataArray[index] as NSDictionary
+        var data = self.slideArray[index-1] as NSDictionary
         var detailCtrl = DetailViewController(nibName :"DetailViewController", bundle: nil)
         detailCtrl.aid = data["id"] as Int
         self.navigationController.pushViewController(detailCtrl, animated: true)
