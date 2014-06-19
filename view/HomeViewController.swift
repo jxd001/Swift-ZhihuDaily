@@ -146,6 +146,7 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
     
     func SlideScrollViewDidClicked(index:Int)
     {
+        if index == 0 {return} // when you click scrollview too soon after the view is presented
         var data = self.slideArray[index-1] as NSDictionary
         var detailCtrl = DetailViewController(nibName :"DetailViewController", bundle: nil)
         detailCtrl.aid = data["id"] as Int
