@@ -58,7 +58,7 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
             var imgView:UIImageView=UIImageView()
             
             var viewWidth = Int(viewSize.size.width)*i
-            imgView.frame = CGRect(origin: CGPoint(x: Float(viewWidth),y: 0),size: CGSize(width: viewSize.size.width,height: viewSize.size.height))
+            imgView.frame = CGRect(origin: CGPoint(x: viewWidth,y: 0),size: CGSize(width: viewSize.size.width,height: viewSize.size.height))
 
             imgView.setImage(imgURL,placeHolder: UIImage(named: "avatar.png"))
             imgView.contentMode = UIViewContentMode.ScaleToFill
@@ -86,14 +86,16 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         shadowImg.image = UIImage(named:"shadow.png")
         self.addSubview(shadowImg)
         
-        var noteView:UIView = UIView(frame:CGRect(origin:CGPoint(x:0, y:170),size:CGSize(width:320,height:myHeight)));
+        var noteView:UIView = UIView(frame:CGRect(origin:CGPoint(x:0, y:170),size:CGSize(width:320,height:CGFloat(myHeight))));
         noteView.userInteractionEnabled = false;
         noteView.backgroundColor = UIColor(red:0/255.0,green:0/255.0,blue:0/255.0,alpha:0)
         
         var pageControlWidth:Float = (Float(pageCount-2))*10.0+Float(40)
         var pagecontrolHeight:Float = myHeight
         
-        pageControl = UIPageControl(frame:CGRect(origin:CGPoint(x:self.viewSize.size.width/2-pageControlWidth/2, y:0),size:CGSize(width:pageControlWidth,height:pagecontrolHeight)))
+        pageControl = UIPageControl(
+            frame:CGRect(origin:CGPoint(x:CGFloat(Float(self.viewSize.size.width)/2-Float(pageControlWidth/2)), y:0),
+            size:CGSize(width:CGFloat(pageControlWidth),height:CGFloat(pagecontrolHeight))))
 
         pageControl.currentPage=0;
         pageControl.numberOfPages=(pageCount-2);
@@ -127,8 +129,8 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
     }
     
     func changeCurrentPage (){
-        var offX = scrollView.frame.size.width * Float(currentPageIndex+1)
-        scrollView.setContentOffset(CGPoint(x:offX, y:scrollView.frame.origin.y), animated:true)
+        var offX = Float(scrollView.frame.size.width) * Float(currentPageIndex+1)
+        scrollView.setContentOffset(CGPoint(x:CGFloat(offX), y:CGFloat(scrollView.frame.origin.y)), animated:true)
         self.scrollViewDidScroll(scrollView);
     }
     
