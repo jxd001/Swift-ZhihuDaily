@@ -12,8 +12,8 @@ extension String {
    
     func stringHeightWith(fontSize:Float,width:Float)->Float
     {
-        var font = UIFont.systemFontOfSize(fontSize)
-        var size = CGSizeMake(width,CGFLOAT_MAX)
+        var font = UIFont.systemFontOfSize(CGFloat(fontSize))
+        var size = CGSizeMake(CGFloat(width),CGFLOAT_MAX)
        // var attr = [font:NSFontAttributeName]
       
 
@@ -25,7 +25,7 @@ extension String {
         var text = self as NSString
         var rect = text.boundingRectWithSize(size, options:.UsesLineFragmentOrigin, attributes: attributes, context:nil)
       
-        return rect.size.height
+        return Float(rect.size.height)
         
     }
     

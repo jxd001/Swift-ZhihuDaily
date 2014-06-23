@@ -101,7 +101,7 @@ class DetailViewController: UIViewController,UIScrollViewDelegate {
         var yOffset   = self.webView.scrollView.contentOffset.y
         var threshold = kImageHeight - kInWindowHeight
         
-        if yOffset > -threshold && yOffset < -64 {
+        if yOffset > Double(-threshold) && yOffset < -64 {
             self.topImage.frame = CGRect(origin: CGPoint(x: 0,y: -100+yOffset/2),size: CGSize(width: 320,height: 300-yOffset/2));
         }
         else if yOffset < -64 {

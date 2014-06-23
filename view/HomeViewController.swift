@@ -152,7 +152,7 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
     func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat
     {
         if indexPath.section==0{
-            return kInWindowHeight
+            return CGFloat(kInWindowHeight)
         }
         else{
             return 106
@@ -170,7 +170,7 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
             cell.clipsToBounds = true
             
             if self.slideImgArray.count > 0{
-                var slideRect = CGRect(origin:CGPoint(x:0,y:0),size:CGSize(width:320,height:self.kImageHeight))
+                var slideRect = CGRect(origin:CGPoint(x:0,y:0),size:CGSize(width:320,height:CGFloat(self.kImageHeight)))
                 
                 var slideView = SlideScrollView(frame: slideRect)
                 slideView.delegate = self
