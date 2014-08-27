@@ -10,7 +10,7 @@ import UIKit
 
 class DetailViewController: UIViewController,UIScrollViewDelegate {
     
-    @IBOutlet var webView : UIWebView
+    @IBOutlet var webView : UIWebView!
     var aid:Int!
     var topImage:UIImageView = UIImageView()
     var url = "http://news-at.zhihu.com/api/3/news/" as String
@@ -18,9 +18,13 @@ class DetailViewController: UIViewController,UIScrollViewDelegate {
     let kImageHeight:Float = 400
     let kInWindowHeight:Float = 200
 
-    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         // Custom initialization
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     override func viewDidLoad() {
@@ -101,7 +105,7 @@ class DetailViewController: UIViewController,UIScrollViewDelegate {
         var yOffset   = self.webView.scrollView.contentOffset.y
         var threshold = kImageHeight - kInWindowHeight
         
-        if yOffset > Double(-threshold) && yOffset < -64 {
+        if Double(yOffset) > Double(-threshold) && Double(yOffset) < -64 {
             self.topImage.frame = CGRect(origin: CGPoint(x: 0,y: -100+yOffset/2),size: CGSize(width: 320,height: 300-yOffset/2));
         }
         else if yOffset < -64 {

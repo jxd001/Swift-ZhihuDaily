@@ -10,8 +10,8 @@ import UIKit
 
 class HomeViewCell: UITableViewCell {
     
-    @IBOutlet var thumbImage : UIImageView
-    @IBOutlet var titleTextView : UITextView
+    @IBOutlet var thumbImage : UIImageView!
+    @IBOutlet var titleTextView : UITextView!
 
     var data:NSDictionary?
 

@@ -13,7 +13,7 @@ extension String {
     func stringHeightWith(fontSize:Float,width:Float)->Float
     {
         var font = UIFont.systemFontOfSize(CGFloat(fontSize))
-        var size = CGSizeMake(CGFloat(width),CGFLOAT_MAX)
+        var size = CGSizeMake(CGFloat(width),CGFloat.max)
        // var attr = [font:NSFontAttributeName]
       
 

@@ -14,7 +14,7 @@ import Foundation
 
 class YRHttpRequest: NSObject {
 
-    init()
+    override init()
     {
         super.init();
     }
@@ -26,7 +26,7 @@ class YRHttpRequest: NSObject {
         req.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:29.0) Gecko/20100101 Firefox/29.0",forHTTPHeaderField:"User-Agent")
         var queue = NSOperationQueue();
         NSURLConnection.sendAsynchronousRequest(req, queue: queue, completionHandler: { response, data, error in
-            if error
+            if (error != nil)
             {
                 dispatch_async(dispatch_get_main_queue(),
                 {
