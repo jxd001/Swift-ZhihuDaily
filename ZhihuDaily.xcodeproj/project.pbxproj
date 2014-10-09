@@ -68,9 +68,9 @@
 				4D916F0A194619E000E64BFB /* model */,
 				4D916F0B194619E000E64BFB /* view */,
 				4D916F0C19461B2600E64BFB /* util */,
-				4D91734B1947E83700E64BFB /* resource */,
 				4D916EE61946151000E64BFB /* Supporting Files */,
 				4D916EE41946151000E64BFB /* Products */,
+				4D91734B1947E83700E64BFB /* resource */,
 			);
 			sourceTree = "<group>";
 		};

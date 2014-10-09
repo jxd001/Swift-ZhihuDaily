@@ -11,7 +11,7 @@ import UIKit
 class HomeViewController: UIViewController,SlideScrollViewDelegate {
 
 
-    @IBOutlet var tableView : UITableView
+    @IBOutlet var tableView : UITableView!
     
     var dataArray = NSMutableArray()
     var slideArray = NSMutableArray()
@@ -27,10 +27,14 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
     let kImageHeight:Float = 400
     let kInWindowHeight:Float = 200
     
-    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+   override  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.title = "今日热闻"
     }
+
+   required init(coder aDecoder: NSCoder) {
+       fatalError("init(coder:) has not been implemented")
+   }
 
 
     override func viewDidLoad() {
