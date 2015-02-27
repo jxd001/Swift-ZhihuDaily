@@ -107,7 +107,7 @@ class YYHRequest: NSObject, NSURLConnectionDataDelegate {
     }
     
     func queryParametersURL() -> NSURL {
-        return NSURL(string: url.absoluteString! + queryString())
+        return NSURL(string: url.absoluteString! + queryString())!
     }
     
     func queryString() -> String {

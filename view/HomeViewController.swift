@@ -101,7 +101,7 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
             img.contentMode = UIViewContentMode.ScaleAspectFit
             
             var window = UIApplication.sharedApplication().keyWindow
-            window.addSubview(img)
+            window?.addSubview(img)
             img.setImage(imgUrl,placeHolder:nil)
             
             var lbl = UILabel(frame:CGRectMake(0,height-50,320,20))
@@ -110,7 +110,7 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
             lbl.textColor = UIColor.lightGrayColor()
             lbl.textAlignment = NSTextAlignment.Center
             lbl.font = UIFont.systemFontOfSize(14)
-            window.addSubview(lbl)
+            window?.addSubview(lbl)
             
             UIView.animateWithDuration(3,animations:{
                 var height = UIScreen.mainScreen().bounds.size.height
@@ -185,7 +185,7 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
             }
         }
         else{
-            var c = tableView?.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as? HomeViewCell
+            var c = tableView?.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath!) as? HomeViewCell
             var index = indexPath!.row
             var data = self.dataArray[index] as NSDictionary
             c!.data = data
@@ -202,7 +202,7 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
         var data = self.dataArray[index] as NSDictionary
         var detailCtrl = DetailViewController(nibName :"DetailViewController", bundle: nil)
         detailCtrl.aid = data["id"] as Int
-        self.navigationController.pushViewController(detailCtrl, animated: true)
+        self.navigationController?.pushViewController(detailCtrl, animated: true)
     }
     
     func SlideScrollViewDidClicked(index:Int)
@@ -211,7 +211,7 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
         var data = self.slideArray[index-1] as NSDictionary
         var detailCtrl = DetailViewController(nibName :"DetailViewController", bundle: nil)
         detailCtrl.aid = data["id"] as Int
-        self.navigationController.pushViewController(detailCtrl, animated: true)
+        self.navigationController?.pushViewController(detailCtrl, animated: true)
     }
     
     override func didReceiveMemoryWarning() {

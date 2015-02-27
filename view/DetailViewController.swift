@@ -68,7 +68,7 @@ class DetailViewController: UIViewController,UIScrollViewDelegate {
                 titleLbl.font = UIFont.boldSystemFontOfSize(16)
                 titleLbl.numberOfLines = 0
                 titleLbl.lineBreakMode = NSLineBreakMode.ByCharWrapping
-                titleLbl.text = data["title"] as String
+                titleLbl.text = data["title"] as? String
                 titleLbl.frame = CGRect(origin: CGPoint(x: 10,y: 130),size: CGSize(width: 300,height: 50))
                 self.webView.scrollView.addSubview(titleLbl)
                 

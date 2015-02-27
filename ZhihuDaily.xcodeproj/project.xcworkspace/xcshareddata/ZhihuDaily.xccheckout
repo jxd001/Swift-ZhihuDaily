@@ -14,7 +14,7 @@
 		<string>https://github.com/jxd001/Swift-ZhihuDaily.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>ZhihuDaily.xcodeproj/project.xcworkspace</string>
+	<string>ZhihuDaily.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>13F9FD913D003FB05C2A4DCCEB19F52765EAEA4C</key>
