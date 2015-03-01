@@ -160,7 +160,7 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
     }
     
     func imagePressed (tap:UITapGestureRecognizer){
-        //delegate?.SlideScrollViewDidClicked(tap.view?.tag!)
+        delegate?.SlideScrollViewDidClicked(tap.view!.tag)
     }
 
 }
