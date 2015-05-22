@@ -40,18 +40,18 @@ class DetailViewController: UIViewController,UIScrollViewDelegate {
         
         YRHttpRequest.requestWithURL(url,completionHandler:{ data in
 
-            if data as NSObject == NSNull()
+            if data as! NSObject == NSNull()
             {
                 UIView.showAlertView("提示",message:"加载失败")
                 return
             }
             
-            var type = data["type"] as Int
+            var type = data["type"] as! Int
             
             var keys = data.allKeys as NSArray
             if keys.containsObject("image")
             {
-                var imgUrl = data["image"] as String
+                var imgUrl = data["image"] as! String
                 self.topImage.frame = CGRect(origin: CGPoint(x: 0,y: -100),size: CGSize(width: 320,height: 300))
                 self.topImage.setImage(imgUrl,placeHolder: UIImage(named: "avatar.png"))
                 self.topImage.contentMode = UIViewContentMode.ScaleAspectFill
@@ -68,7 +68,7 @@ class DetailViewController: UIViewController,UIScrollViewDelegate {
                 titleLbl.font = UIFont.boldSystemFontOfSize(16)
                 titleLbl.numberOfLines = 0
                 titleLbl.lineBreakMode = NSLineBreakMode.ByCharWrapping
-                titleLbl.text = data["title"] as String
+                titleLbl.text = data["title"] as! String
                 titleLbl.frame = CGRect(origin: CGPoint(x: 10,y: 130),size: CGSize(width: 300,height: 50))
                 self.webView.scrollView.addSubview(titleLbl)
                 
@@ -83,9 +83,9 @@ class DetailViewController: UIViewController,UIScrollViewDelegate {
             }
             
             
-            var body = data["body"] as String
-            var css = data["css"] as NSArray
-            var cssUrl = css[0] as String
+            var body = data["body"] as! String
+            var css = data["css"] as! NSArray
+            var cssUrl = css[0] as! String
             
             body = "<link href='\(cssUrl)' rel='stylesheet' type='text/css' />\(body)"
             
@@ -95,7 +95,7 @@ class DetailViewController: UIViewController,UIScrollViewDelegate {
         
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView!)
+    func scrollViewDidScroll(scrollView: UIScrollView)
     {
         var yOffset = self.webView.scrollView.contentOffset.y
         updateOffsets()

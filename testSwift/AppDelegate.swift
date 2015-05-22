@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
+     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         // Override point for customization after application launch.
         
@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         homeNav.navigationBar.barTintColor = UIColor(red: 0/255.0, green: 176/255.0, blue: 232/255.0, alpha: 1.0)
         
         var titleAttr:NSDictionary = NSDictionary(object:UIColor.whiteColor(),forKey:NSForegroundColorAttributeName)
-        homeNav.navigationBar.titleTextAttributes = titleAttr
+        homeNav.navigationBar.titleTextAttributes = titleAttr as [NSObject: AnyObject]
         
         self.window!.rootViewController = homeNav
         

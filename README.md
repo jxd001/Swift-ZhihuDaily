@@ -1,6 +1,10 @@
 Swift-ZhihuDaily
 ================
 
+2015-05-22
+================
+新增xcode 6.3、swift 1.2的支持 (add by tao.yang)
+
 Swift版知乎日报
 
 参照了[YANGReal](https://github.com/YANGReal)的糗事百科和uitableview的例子，他的东西写的很棒，让我学到了很多东西，感谢~
