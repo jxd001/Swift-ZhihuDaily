@@ -13,15 +13,14 @@ extension UIImageView
 {
     func setImage(urlString:String,placeHolder:UIImage!)
     {
-    
-        var url = NSURL.URLWithString(urlString)
+        var url = NSURL.fileURLWithPath(urlString)!
         var cacheFilename = url.lastPathComponent
-        var cachePath = FileUtility.cachePath(cacheFilename)
+        var cachePath = FileUtility.cachePath(cacheFilename!)
         var image : AnyObject = FileUtility.imageDataFromPath(cachePath)
-      //  println(cachePath)
-        if image as NSObject != NSNull()
+
+        if image as! NSObject != NSNull()
         {
-            self.image = image as UIImage
+            self.image = image as? UIImage
         }
         else
         {
