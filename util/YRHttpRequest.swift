@@ -21,8 +21,8 @@ class YRHttpRequest: NSObject {
     
     class func requestWithURL(urlString:String,completionHandler:(data:AnyObject)->Void)
     {
-        var URL = NSURL.URLWithString(urlString)
-        var req = NSMutableURLRequest(URL:URL)
+        var URL = NSURL(string: urlString)
+        var req = NSMutableURLRequest(URL: URL!)
         req.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:29.0) Gecko/20100101 Firefox/29.0",forHTTPHeaderField:"User-Agent")
         var queue = NSOperationQueue();
         NSURLConnection.sendAsynchronousRequest(req, queue: queue, completionHandler: { response, data, error in
@@ -37,7 +37,7 @@ class YRHttpRequest: NSObject {
             else
             {
                 var err:NSError?
-                let jsonData = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as NSDictionary
+                let jsonData = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as! NSDictionary
 
                 dispatch_async(dispatch_get_main_queue(),
                 {
