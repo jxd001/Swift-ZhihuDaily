@@ -25,7 +25,7 @@ extension String {
         let text = self as NSString
         let rect = text.boundingRectWithSize(size, options:.UsesLineFragmentOrigin, attributes: attributes, context:nil)
       
-        return rect.size.height
+        return (rect.size.height)
         
     }
     

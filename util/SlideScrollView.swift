@@ -86,14 +86,16 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         shadowImg.image = UIImage(named:"shadow.png")
         self.addSubview(shadowImg)
         
-        let noteView:UIView = UIView(frame:CGRect(origin:CGPoint(x:0, y:170),size:CGSize(width:320,height:myHeight)));
+        let noteView:UIView = UIView(frame:CGRect(origin:CGPoint(x:0, y:170),size:CGSize(width:320,height:CGFloat(myHeight))));
         noteView.userInteractionEnabled = false;
         noteView.backgroundColor = UIColor(red:0/255.0,green:0/255.0,blue:0/255.0,alpha:0)
         
         let pageControlWidth:CGFloat = (CGFloat(pageCount-2))*10.0+CGFloat(40)
         let pagecontrolHeight:CGFloat = myHeight
         
-        pageControl = UIPageControl(frame:CGRect(origin:CGPoint(x:self.viewSize.size.width/2-pageControlWidth/2, y:0),size:CGSize(width:pageControlWidth,height:pagecontrolHeight)))
+        pageControl = UIPageControl(
+            frame:CGRect(origin:CGPoint(x:CGFloat(Float(self.viewSize.size.width)/2-Float(pageControlWidth/2)), y:0),
+            size:CGSize(width:CGFloat(pageControlWidth),height:CGFloat(pagecontrolHeight))))
 
         pageControl.currentPage=0;
         pageControl.numberOfPages=(pageCount-2);

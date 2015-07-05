@@ -10,7 +10,7 @@ import UIKit
 
 class DetailViewController: UIViewController,UIScrollViewDelegate {
     
-    @IBOutlet var webView : UIWebView?
+    @IBOutlet var webView : UIWebView!
     var aid:Int!
     var topImage:UIImageView = UIImageView()
     var url = "https://news-at.zhihu.com/api/3/news/" as String
@@ -105,7 +105,7 @@ class DetailViewController: UIViewController,UIScrollViewDelegate {
         let yOffset   = self.webView!.scrollView.contentOffset.y
         let threshold = CGFloat(kImageHeight - kInWindowHeight)
         
-        if yOffset > -threshold && yOffset < -64 {
+        if Double(yOffset) > Double(-threshold) && Double(yOffset) < -64 {
             self.topImage.frame = CGRect(origin: CGPoint(x: 0,y: -100+yOffset/2),size: CGSize(width: 320,height: 300-yOffset/2));
         }
         else if yOffset < -64 {

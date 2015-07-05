@@ -14,7 +14,7 @@ extension UIImageView
     func setImage(urlString:String,placeHolder:UIImage!)
     {
     
-        var url = NSURL(string:urlString)
+        let url = NSURL(string:urlString)
         var cacheFilename = url!.lastPathComponent
         var cachePath = FileUtility.cachePath(cacheFilename!)
         var image : AnyObject = FileUtility.imageDataFromPath(cachePath)
@@ -42,15 +42,15 @@ extension UIImageView
                         {
                             
                             var image = UIImage(data: data!)
-                            if image == nil
-                            {
-                                self.image = placeHolder
-                            }
-                            else
-                            {
+//                            if image == nil
+//                            {
+//                                self.image = placeHolder
+//                            }
+//                            else
+//                            {
                                 self.image = image
                                 FileUtility.imageCacheToPath(cachePath,image:data!)
-                            }
+//                            }
                         })
                 }
                 })

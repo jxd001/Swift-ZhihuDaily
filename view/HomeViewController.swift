@@ -21,18 +21,20 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
     
     let identifier = "cell"
     let url = "https://news-at.zhihu.com/api/3/news/latest"
+    let launchImgUrl = "https://news-at.zhihu.com/api/3/start-image/640*960"
     
-    let kImageHeight:CGFloat = 400
-    let kInWindowHeight:CGFloat = 200
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    let kImageHeight:Float = 400
+    let kInWindowHeight:Float = 200
+    
+   override  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.title = "今日热闻"
     }
 
-    required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+   required init(coder aDecoder: NSCoder) {
+       fatalError("init(coder:) has not been implemented")
+   }
 
 
     override func viewDidLoad() {
@@ -43,6 +45,8 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
         self.tableView?.registerNib(nib, forCellReuseIdentifier: identifier)
         
         self.edgesForExtendedLayout = UIRectEdge.Top
+        
+        showLauchImage()
         
         loadData()
     }
@@ -82,6 +86,59 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
         
     }
     
+    func showLauchImage () {
+        YRHttpRequest.requestWithURL(launchImgUrl,completionHandler:{ data in
+            if data as! NSObject == NSNull()
+            {
+                return
+            }
+            
+            let imgUrl = data["img"] as! String
+            
+            let height = UIScreen.mainScreen().bounds.size.height
+            let img = UIImageView(frame:CGRectMake(0, 0, 320, height))
+            img.backgroundColor = UIColor.blackColor()
+            img.contentMode = UIViewContentMode.ScaleAspectFit
+            
+            let window = UIApplication.sharedApplication().keyWindow
+            window!.addSubview(img)
+            img.setImage(imgUrl,placeHolder:nil)
+            
+            let lbl = UILabel(frame:CGRectMake(0,height-50,320,20))
+            lbl.backgroundColor = UIColor.clearColor()
+            lbl.text = data["text"] as? String
+            lbl.textColor = UIColor.lightGrayColor()
+            lbl.textAlignment = NSTextAlignment.Center
+            lbl.font = UIFont.systemFontOfSize(14)
+            window!.addSubview(lbl)
+            
+            UIView.animateWithDuration(3,animations:{
+                let height = UIScreen.mainScreen().bounds.size.height
+                let rect = CGRectMake(-100,-100,320+200,height+200)
+                img.frame = rect
+                },completion:{
+                    (Bool completion) in
+                    
+                    if completion {
+                        UIView.animateWithDuration(1,animations:{
+                            img.alpha = 0
+                            lbl.alpha = 0
+                            },completion:{
+                                (Bool completion) in
+                                
+                                if completion {
+                                    img.removeFromSuperview()
+                                    lbl.removeFromSuperview()
+                                }
+                            })
+                    }
+                })
+        })
+        
+    }
+    
+   
+    
     func numberOfSectionsInTableView(tableView: UITableView!) -> Int{
         return 2
     }
@@ -99,7 +156,7 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
     func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat
     {
         if indexPath.section==0{
-            return kInWindowHeight
+            return CGFloat(kInWindowHeight)
         }
         else{
             return 106
@@ -117,9 +174,9 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
             cell.clipsToBounds = true
             
             if self.slideImgArray.count > 0{
-                var slideRect = CGRect(origin:CGPoint(x:0,y:0),size:CGSize(width:320,height:self.kImageHeight))
+                let slideRect = CGRect(origin:CGPoint(x:0,y:0),size:CGSize(width:320,height:CGFloat(self.kImageHeight)))
                 
-                var slideView = SlideScrollView(frame: slideRect)
+                let slideView = SlideScrollView(frame: slideRect)
                 slideView.delegate = self
                 slideView.initWithFrameRect(slideRect,imgArr:self.slideImgArray,titArr:self.slideTtlArray)
 //                self.view.addSubview(slideView)
@@ -128,9 +185,9 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
             }
         }
         else{
-            var c = tableView?.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath!) as? HomeViewCell
-            var index = indexPath!.row
-            var data = self.dataArray[index] as! NSDictionary
+            let c = tableView?.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath!) as? HomeViewCell
+            let index = indexPath!.row
+            let data = self.dataArray[index] as! NSDictionary
             c!.data = data
             cell = c!
         }
@@ -141,17 +198,18 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
     {
         if indexPath!.section==0 {return}
         tableView.deselectRowAtIndexPath(indexPath!,animated: true)
-        var index = indexPath!.row
-        var data = self.dataArray[index] as! NSDictionary
-        var detailCtrl = DetailViewController(nibName :"DetailViewController", bundle: nil)
+        let index = indexPath!.row
+        let data = self.dataArray[index] as! NSDictionary
+        let detailCtrl = DetailViewController(nibName :"DetailViewController", bundle: nil)
         detailCtrl.aid = data["id"] as! Int
         self.navigationController!.pushViewController(detailCtrl, animated: true)
     }
     
     func SlideScrollViewDidClicked(index:Int)
     {
-        var data = self.slideArray[index-1] as! NSDictionary
-        var detailCtrl = DetailViewController(nibName :"DetailViewController", bundle: nil)
+        if index == 0 {return} // when you click scrollview too soon after the view is presented
+        let data = self.slideArray[index-1] as! NSDictionary
+        let detailCtrl = DetailViewController(nibName :"DetailViewController", bundle: nil)
         detailCtrl.aid = data["id"] as! Int
         self.navigationController!.pushViewController(detailCtrl, animated: true)
     }

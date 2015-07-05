@@ -10,8 +10,8 @@ import UIKit
 
 class HomeViewCell: UITableViewCell {
     
-    @IBOutlet var thumbImage : UIImageView?
-    @IBOutlet var titleTextView : UITextView?
+    @IBOutlet var thumbImage : UIImageView!
+    @IBOutlet var titleTextView : UITextView!
 
     var data:NSDictionary?
 
@@ -31,11 +31,11 @@ class HomeViewCell: UITableViewCell {
         super.layoutSubviews()
         var dic:NSDictionary = self.data!
         
-        self.titleTextView!.text = dic["title"] as! String
+        self.titleTextView.text = dic["title"] as! String
         
         var thumbArr = dic["images"] as! NSArray
         var thumbUrl = thumbArr[0] as! String
         
-        self.thumbImage!.setImage(thumbUrl,placeHolder: UIImage(named: "avatar.png"))
+        self.thumbImage.setImage(thumbUrl,placeHolder: UIImage(named: "avatar.png"))
     }
 }
