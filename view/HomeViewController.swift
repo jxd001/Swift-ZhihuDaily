@@ -11,7 +11,7 @@ import UIKit
 class HomeViewController: UIViewController,SlideScrollViewDelegate {
 
 
-    @IBOutlet var tableView : UITableView
+    @IBOutlet var tableView : UITableView!
     
     var dataArray = NSMutableArray()
     var slideArray = NSMutableArray()
@@ -20,14 +20,18 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
     
     
     let identifier = "cell"
-    let url = "http://news-at.zhihu.com/api/3/news/latest"
+    let url = "https://news-at.zhihu.com/api/3/news/latest"
     
-    let kImageHeight:Float = 400
-    let kInWindowHeight:Float = 200
+    let kImageHeight:CGFloat = 400
+    let kInWindowHeight:CGFloat = 200
     
-    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.title = "今日热闻"
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
 
@@ -47,28 +51,28 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
     {
 
         YRHttpRequest.requestWithURL(url,completionHandler:{ data in
-            if data as NSObject == NSNull()
+            if data as! NSObject == NSNull()
             {
                 UIView.showAlertView("提示",message:"加载失败")
                 return
             }
 
-            var arr = data["stories"] as NSArray
+            var arr = data["stories"] as! NSArray
 
             for data : AnyObject  in arr
             {
                 self.dataArray.addObject(data)
             }
             
-            var topArr = data["top_stories"] as NSArray
+            var topArr = data["top_stories"] as! NSArray
             self.slideArray = NSMutableArray(array:topArr)
             for topData : AnyObject in topArr
             {
-                var dic = topData as NSDictionary
-                var imgUrl = dic["image"] as String
+                var dic = topData as! NSDictionary
+                var imgUrl = dic["image"] as! String
                 self.slideImgArray.addObject(imgUrl)
                 
-                var title = dic["title"] as String
+                var title = dic["title"] as! String
                 self.slideTtlArray.addObject(title)
             }
             
@@ -124,9 +128,9 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
             }
         }
         else{
-            var c = tableView?.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as? HomeViewCell
+            var c = tableView?.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath!) as? HomeViewCell
             var index = indexPath!.row
-            var data = self.dataArray[index] as NSDictionary
+            var data = self.dataArray[index] as! NSDictionary
             c!.data = data
             cell = c!
         }
@@ -138,18 +142,18 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
         if indexPath!.section==0 {return}
         tableView.deselectRowAtIndexPath(indexPath!,animated: true)
         var index = indexPath!.row
-        var data = self.dataArray[index] as NSDictionary
+        var data = self.dataArray[index] as! NSDictionary
         var detailCtrl = DetailViewController(nibName :"DetailViewController", bundle: nil)
-        detailCtrl.aid = data["id"] as Int
-        self.navigationController.pushViewController(detailCtrl, animated: true)
+        detailCtrl.aid = data["id"] as! Int
+        self.navigationController!.pushViewController(detailCtrl, animated: true)
     }
     
     func SlideScrollViewDidClicked(index:Int)
     {
-        var data = self.slideArray[index-1] as NSDictionary
+        var data = self.slideArray[index-1] as! NSDictionary
         var detailCtrl = DetailViewController(nibName :"DetailViewController", bundle: nil)
-        detailCtrl.aid = data["id"] as Int
-        self.navigationController.pushViewController(detailCtrl, animated: true)
+        detailCtrl.aid = data["id"] as! Int
+        self.navigationController!.pushViewController(detailCtrl, animated: true)
     }
     
     override func didReceiveMemoryWarning() {

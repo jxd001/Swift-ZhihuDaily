@@ -14,25 +14,25 @@ extension UIImageView
     func setImage(urlString:String,placeHolder:UIImage!)
     {
     
-        var url = NSURL.URLWithString(urlString)
-        var cacheFilename = url.lastPathComponent
-        var cachePath = FileUtility.cachePath(cacheFilename)
+        var url = NSURL(string:urlString)
+        var cacheFilename = url!.lastPathComponent
+        var cachePath = FileUtility.cachePath(cacheFilename!)
         var image : AnyObject = FileUtility.imageDataFromPath(cachePath)
       //  println(cachePath)
-        if image as NSObject != NSNull()
+        if image as! NSObject != NSNull()
         {
-            self.image = image as UIImage
+            self.image = image as! UIImage
         }
         else
         {
-            var req = NSURLRequest(URL: url)
+            var req = NSURLRequest(URL: url!)
             var queue = NSOperationQueue();
             NSURLConnection.sendAsynchronousRequest(req, queue: queue, completionHandler: { response, data, error in
-                if error
+                if (error != nil)
                 {
                     dispatch_async(dispatch_get_main_queue(),
                         {
-                            println(error)
+                            print(error)
                             self.image = placeHolder
                         })
                 }
@@ -41,7 +41,7 @@ extension UIImageView
                     dispatch_async(dispatch_get_main_queue(),
                         {
                             
-                            var image = UIImage(data: data)
+                            var image = UIImage(data: data!)
                             if image == nil
                             {
                                 self.image = placeHolder
@@ -49,7 +49,7 @@ extension UIImageView
                             else
                             {
                                 self.image = image
-                                FileUtility.imageCacheToPath(cachePath,image:data)
+                                FileUtility.imageCacheToPath(cachePath,image:data!)
                             }
                         })
                 }

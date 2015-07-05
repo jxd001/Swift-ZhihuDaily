@@ -54,11 +54,11 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         scrollView.delegate = self
         
         for var i=0; i<pageCount; i++ {
-            var imgURL:String=imageArray[i] as String
+            var imgURL:String=imageArray[i] as! String
             var imgView:UIImageView=UIImageView()
             
             var viewWidth = Int(viewSize.size.width)*i
-            imgView.frame = CGRect(origin: CGPoint(x: Float(viewWidth),y: 0),size: CGSize(width: viewSize.size.width,height: viewSize.size.height))
+            imgView.frame = CGRect(origin: CGPoint(x: CGFloat(viewWidth), y:CGFloat(0)),size: CGSize(width: viewSize.size.width,height: viewSize.size.height))
 
             imgView.setImage(imgURL,placeHolder: UIImage(named: "avatar.png"))
             imgView.contentMode = UIViewContentMode.ScaleToFill
@@ -79,19 +79,19 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         self.addSubview(scrollView)
 
         //文字层
-        var myHeight:Float = 24;
+        var myHeight:CGFloat = 24;
         
         var shadowImg:UIImageView = UIImageView()
         shadowImg.frame = CGRect(origin: CGPoint(x: 0,y: 130),size: CGSize(width: 320,height: 80))
         shadowImg.image = UIImage(named:"shadow.png")
         self.addSubview(shadowImg)
         
-        var noteView:UIView = UIView(frame:CGRect(origin:CGPoint(x:0, y:170),size:CGSize(width:320,height:myHeight)));
+        let noteView:UIView = UIView(frame:CGRect(origin:CGPoint(x:0, y:170),size:CGSize(width:320,height:myHeight)));
         noteView.userInteractionEnabled = false;
         noteView.backgroundColor = UIColor(red:0/255.0,green:0/255.0,blue:0/255.0,alpha:0)
         
-        var pageControlWidth:Float = (Float(pageCount-2))*10.0+Float(40)
-        var pagecontrolHeight:Float = myHeight
+        let pageControlWidth:CGFloat = (CGFloat(pageCount-2))*10.0+CGFloat(40)
+        let pagecontrolHeight:CGFloat = myHeight
         
         pageControl = UIPageControl(frame:CGRect(origin:CGPoint(x:self.viewSize.size.width/2-pageControlWidth/2, y:0),size:CGSize(width:pageControlWidth,height:pagecontrolHeight)))
 
@@ -104,7 +104,7 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         noteTitle.font = UIFont.boldSystemFontOfSize(16)
         noteTitle.numberOfLines = 0
         noteTitle.lineBreakMode = NSLineBreakMode.ByCharWrapping
-        noteTitle.text = self.titleArray[0] as String
+        noteTitle.text = self.titleArray[0] as! String
         noteTitle.frame = CGRect(origin: CGPoint(x: 10,y: 130),size: CGSize(width: 300,height: 50))
         self.addSubview(noteTitle)
 
@@ -127,7 +127,7 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
     }
     
     func changeCurrentPage (){
-        var offX = scrollView.frame.size.width * Float(currentPageIndex+1)
+        var offX = scrollView.frame.size.width * CGFloat(currentPageIndex+1)
         scrollView.setContentOffset(CGPoint(x:offX, y:scrollView.frame.origin.y), animated:true)
         self.scrollViewDidScroll(scrollView);
     }
@@ -137,12 +137,12 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         // var page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1
         //应该是我没搞明白swift的真谛吧，我不相信有这么麻烦，求大神指教啊
 
-        var pageWidth:Int = Int(scrollView.frame.size.width)
-        var offX:Int = Int(scrollView.contentOffset.x)
-        var a = offX - pageWidth / 2 as Int
-        var b = a / pageWidth as Int
-        var c = floor(Double(b))
-        var page:Int = Int(c) + 1
+        let pageWidth:Int = Int(scrollView.frame.size.width)
+        let offX:Int = Int(scrollView.contentOffset.x)
+        let a = offX - pageWidth / 2 as Int
+        let b = a / pageWidth as Int
+        let c = floor(Double(b))
+        let page:Int = Int(c) + 1
         
         currentPageIndex=page
         pageControl.currentPage=(page-1)
@@ -153,12 +153,12 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         if (titleIndex<0) {
         titleIndex=titleArray.count-1;
         }
-        noteTitle.text = self.titleArray[titleIndex] as String
+        noteTitle.text = self.titleArray[titleIndex] as! String
 
     }
     
     func imagePressed (tap:UITapGestureRecognizer){
-        delegate?.SlideScrollViewDidClicked(tap.view.tag)
+        delegate?.SlideScrollViewDidClicked(tap.view!.tag)
     }
 
 }
