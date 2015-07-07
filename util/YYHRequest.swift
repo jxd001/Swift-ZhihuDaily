@@ -107,7 +107,7 @@ class YYHRequest: NSObject, NSURLConnectionDataDelegate {
     }
     
     func queryParametersURL() -> NSURL {
-        return NSURL(string: url.absoluteString! + queryString())
+        return NSURL(string: url.absoluteString! + queryString())!
     }
     
     func queryString() -> String {
@@ -130,15 +130,15 @@ class YYHRequest: NSObject, NSURLConnectionDataDelegate {
         completionHandler(nil, nil, error)
     }
     
-    func connection(_: NSURLConnection!, didReceiveResponse response: NSURLResponse!) {
+    func connection(_: NSURLConnection, didReceiveResponse response: NSURLResponse) {
         self.response = response
     }
     
-    func connection(_: NSURLConnection!, didReceiveData data: NSData!) {
+    func connection(_: NSURLConnection, didReceiveData data: NSData) {
         responseData.appendData(data)
     }
-    
-    func connectionDidFinishLoading(_: NSURLConnection!) {
+  
+    func connectionDidFinishLoading(_: NSURLConnection) {
         completionHandler(response, responseData, nil)
     }
 }

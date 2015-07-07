@@ -54,8 +54,8 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         scrollView.delegate = self
         
         for var i=0; i<pageCount; i++ {
-            var imgURL:String=imageArray[i] as String
-            var imgView:UIImageView=UIImageView()
+            var imgURL:String = imageArray[i] as! String
+            var imgView:UIImageView = UIImageView()
             
             var viewWidth = Int(viewSize.size.width)*i
             imgView.frame = CGRect(origin: CGPoint(x: viewWidth,y: 0),size: CGSize(width: viewSize.size.width,height: viewSize.size.height))
@@ -106,7 +106,7 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         noteTitle.font = UIFont.boldSystemFontOfSize(16)
         noteTitle.numberOfLines = 0
         noteTitle.lineBreakMode = NSLineBreakMode.ByCharWrapping
-        noteTitle.text = self.titleArray[0] as String
+        noteTitle.text = self.titleArray[0] as! String
         noteTitle.frame = CGRect(origin: CGPoint(x: 10,y: 130),size: CGSize(width: 300,height: 50))
         self.addSubview(noteTitle)
 
@@ -134,7 +134,7 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         self.scrollViewDidScroll(scrollView);
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView!) {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
         //感觉swift算数运算的时候好麻烦啊，一个运算里必须要所有的值都保持一致才行，所以一个运算才变成了下面这一大段难看的代码，本来应该是这样的：
         // var page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1
         //应该是我没搞明白swift的真谛吧，我不相信有这么麻烦，求大神指教啊
@@ -155,12 +155,11 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         if (titleIndex<0) {
         titleIndex=titleArray.count-1;
         }
-        noteTitle.text = self.titleArray[titleIndex] as String
-
+        noteTitle.text = self.titleArray[titleIndex] as? String
     }
     
     func imagePressed (tap:UITapGestureRecognizer){
-        delegate?.SlideScrollViewDidClicked(tap.view.tag)
+        delegate?.SlideScrollViewDidClicked(tap.view!.tag)
     }
 
 }
