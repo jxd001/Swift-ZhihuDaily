@@ -27,6 +27,8 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
     let kImageHeight:Float = 400
     let kInWindowHeight:Float = 200
     
+    //MARK:-
+    
    override  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.title = "今日热闻"
@@ -137,7 +139,8 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
         
     }
     
-   
+    //MARK:
+    //MARK: -------tableView delegate&datasource
     
     func numberOfSectionsInTableView(tableView: UITableView!) -> Int{
         return 2
@@ -205,6 +208,10 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
         self.navigationController!.pushViewController(detailCtrl, animated: true)
     }
     
+    
+    //MARK:
+    //MARK:------slidescroll delegate
+    
     func SlideScrollViewDidClicked(index:Int)
     {
         if index == 0 {return} // when you click scrollview too soon after the view is presented
@@ -213,6 +220,8 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
         detailCtrl.aid = data["id"] as! Int
         self.navigationController!.pushViewController(detailCtrl, animated: true)
     }
+    
+    //MARK:
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
