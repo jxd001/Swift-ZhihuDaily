@@ -13,16 +13,21 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
 
     @IBOutlet var tableView : UITableView!
     
-    var dataArray = NSMutableArray()
+    var dataKey = NSMutableArray()
+    var dataFull = NSMutableDictionary() //date as key, above
     var slideArray = NSMutableArray()
     var slideImgArray = NSMutableArray()
     var slideTtlArray = NSMutableArray()
     
+    var bloading = false;
     
     let identifier = "cell"
-    let url = "http://news-at.zhihu.com/api/3/news/latest"
-    let launchImgUrl = "http://news-at.zhihu.com/api/3/start-image/640*960"
-    
+//    let url = "https://news-at.zhihu.com/api/3/news/latest"
+    let url = "http://news-at.zhihu.com/api/4/stories/latest?client=0"
+    let continueUrl = "http://news-at.zhihu.com/api/4/stories/before/"
+//    let launchImgUrl = "https://news-at.zhihu.com/api/3/start-image/640*960"
+    let launchImgUrl = "https://news-at.zhihu.com/api/4/start-image/640*1136?client=0";
+    var dateString = "";
     
     let kImageHeight:Float = 400
     let kInWindowHeight:Float = 200
@@ -53,32 +58,44 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
     
     func loadData()
     {
+        if(bloading){
+            return;
+        }
+        self.bloading = true;
+        var curUrl = url;
+        if(dateString.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0){
+            curUrl = continueUrl.stringByAppendingString(dateString);
+        }
 
-        YRHttpRequest.requestWithURL(url,completionHandler:{ data in
+        YRHttpRequest.requestWithURL(curUrl,completionHandler:{ data in
+            self.bloading = false;
             if data as! NSObject == NSNull()
             {
                 UIView.showAlertView("提示",message:"加载失败")
                 return
             }
 
-            var arr = data["stories"] as! NSArray
-
-            for data : AnyObject  in arr
-            {
-                self.dataArray.addObject(data)
+            
+            if(self.dateString.isEmpty){
+                let topArr = data["top_stories"] as! NSArray
+                self.slideArray = NSMutableArray(array:topArr)
+                for topData : AnyObject in topArr
+                {
+                    let dic = topData as! NSDictionary
+                    let imgUrl = dic["image"] as! String
+                    self.slideImgArray.addObject(imgUrl)
+                    
+                    let title = dic["title"] as! String
+                    self.slideTtlArray.addObject(title)
+                }
             }
             
-            var topArr = data["top_stories"] as! NSArray
-            self.slideArray = NSMutableArray(array:topArr)
-            for topData : AnyObject in topArr
-            {
-                var dic = topData as! NSDictionary
-                var imgUrl = dic["image"] as! String
-                self.slideImgArray.addObject(imgUrl)
-                
-                var title = dic["title"] as! String
-                self.slideTtlArray.addObject(title)
-            }
+            self.dateString = data["date"] as! String
+            
+            
+            let arr = data["stories"] as! NSArray
+            self.dataKey.addObject(self.dateString);
+            self.dataFull.addEntriesFromDictionary([self.dateString : arr])
             
             self.tableView!.reloadData()
 
@@ -93,18 +110,18 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
                 return
             }
             
-            var imgUrl = data["img"] as! String
+            let imgUrl = data["img"] as! String
             
-            var height = UIScreen.mainScreen().bounds.size.height
-            var img = UIImageView(frame:CGRectMake(0, 0, 320, height))
+            let height = UIScreen.mainScreen().bounds.size.height
+            let img = UIImageView(frame:CGRectMake(0, 0, 320, height))
             img.backgroundColor = UIColor.blackColor()
             img.contentMode = UIViewContentMode.ScaleAspectFit
             
-            var window = UIApplication.sharedApplication().keyWindow
+            let window = UIApplication.sharedApplication().keyWindow
             window!.addSubview(img)
             img.setImage(imgUrl,placeHolder:nil)
             
-            var lbl = UILabel(frame:CGRectMake(0,height-50,320,20))
+            let lbl = UILabel(frame:CGRectMake(0,height-50,320,20))
             lbl.backgroundColor = UIColor.clearColor()
             lbl.text = data["text"] as? String
             lbl.textColor = UIColor.lightGrayColor()
@@ -113,8 +130,8 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
             window!.addSubview(lbl)
             
             UIView.animateWithDuration(3,animations:{
-                var height = UIScreen.mainScreen().bounds.size.height
-                var rect = CGRectMake(-100,-100,320+200,height+200)
+                let height = UIScreen.mainScreen().bounds.size.height
+                let rect = CGRectMake(-100,-100,320+200,height+200)
                 img.frame = rect
                 },completion:{
                     (Bool completion) in
@@ -140,7 +157,7 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
    
     
     func numberOfSectionsInTableView(tableView: UITableView!) -> Int{
-        return 2
+        return 1 + self.dataKey.count
     }
     
     func tableView(tableView: UITableView?, numberOfRowsInSection section: Int) -> Int {
@@ -149,7 +166,8 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
         }
         else
         {
-            return self.dataArray.count
+            let array1 = self.dataFull[self.dataKey[section-1] as! String] as! NSArray
+            return array1.count
         }
     }
     
@@ -174,9 +192,9 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
             cell.clipsToBounds = true
             
             if self.slideImgArray.count > 0{
-                var slideRect = CGRect(origin:CGPoint(x:0,y:0),size:CGSize(width:320,height:CGFloat(self.kImageHeight)))
+                let slideRect = CGRect(origin:CGPoint(x:0,y:0),size:CGSize(width:320,height:CGFloat(self.kImageHeight)))
                 
-                var slideView = SlideScrollView(frame: slideRect)
+                let slideView = SlideScrollView(frame: slideRect)
                 slideView.delegate = self
                 slideView.initWithFrameRect(slideRect,imgArr:self.slideImgArray,titArr:self.slideTtlArray)
 //                self.view.addSubview(slideView)
@@ -185,9 +203,10 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
             }
         }
         else{
-            var c = tableView?.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath!) as? HomeViewCell
-            var index = indexPath!.row
-            var data = self.dataArray[index] as! NSDictionary
+            let c = tableView?.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath!) as? HomeViewCell
+            let index = indexPath!.row
+            let array1 = self.dataFull[self.dataKey[(indexPath?.section)!-1] as! String] as! NSArray
+            let data = array1[index] as! NSDictionary
             c!.data = data
             cell = c!
         }
@@ -198,18 +217,45 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
     {
         if indexPath!.section==0 {return}
         tableView.deselectRowAtIndexPath(indexPath!,animated: true)
-        var index = indexPath!.row
-        var data = self.dataArray[index] as! NSDictionary
-        var detailCtrl = DetailViewController(nibName :"DetailViewController", bundle: nil)
+        let index = indexPath!.row
+        let array1 = self.dataFull[self.dataKey[(indexPath?.section)!-1] as! String] as! NSArray
+        let data = array1[index] as! NSDictionary
+        let detailCtrl = DetailViewController(nibName :"DetailViewController", bundle: nil)
         detailCtrl.aid = data["id"] as! Int
         self.navigationController!.pushViewController(detailCtrl, animated: true)
     }
+
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
+    {
+        if(section <= 1)
+        {
+            return 0
+        }
+        return 44;//NavigationBar Height
+    }
     
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+    {
+        let lbl = UILabel(frame:CGRectMake(0,0,320,44))
+        lbl.backgroundColor = UIColor.lightGrayColor()
+        if(section > 0){
+            lbl.text = self.dataKey[section-1] as? String
+        }
+        lbl.textColor = UIColor.darkTextColor()
+        lbl.textAlignment = NSTextAlignment.Center
+        lbl.font = UIFont.systemFontOfSize(14)
+        return lbl;
+    }
+    func scrollViewDidScroll(scrollView: UIScrollView){
+        if(scrollView.contentSize.height - scrollView.contentOffset.y - scrollView.frame.height < scrollView.frame.height/3){
+            loadData()
+        }
+    }
     func SlideScrollViewDidClicked(index:Int)
     {
         if index == 0 {return} // when you click scrollview too soon after the view is presented
-        var data = self.slideArray[index-1] as! NSDictionary
-        var detailCtrl = DetailViewController(nibName :"DetailViewController", bundle: nil)
+        let data = self.slideArray[index-1] as! NSDictionary
+        let detailCtrl = DetailViewController(nibName :"DetailViewController", bundle: nil)
         detailCtrl.aid = data["id"] as! Int
         self.navigationController!.pushViewController(detailCtrl, animated: true)
     }

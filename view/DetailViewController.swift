@@ -13,7 +13,7 @@ class DetailViewController: UIViewController,UIScrollViewDelegate {
     @IBOutlet var webView : UIWebView!
     var aid:Int!
     var topImage:UIImageView = UIImageView()
-    var url = "http://news-at.zhihu.com/api/3/news/" as String
+    var url = "https://news-at.zhihu.com/api/3/news/" as String
     
     let kImageHeight:Float = 400
     let kInWindowHeight:Float = 200
@@ -29,7 +29,7 @@ class DetailViewController: UIViewController,UIScrollViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.webView.scrollView.delegate = self
+        self.webView!.scrollView.delegate = self
 
         loadData()
     }
@@ -48,29 +48,29 @@ class DetailViewController: UIViewController,UIScrollViewDelegate {
             
             var type = data["type"] as! Int
             
-            var keys = data.allKeys as NSArray
+            let keys = data.allKeys as NSArray
             if keys.containsObject("image")
             {
-                var imgUrl = data["image"] as! String
+                let imgUrl = data["image"] as! String
                 self.topImage.frame = CGRect(origin: CGPoint(x: 0,y: -100),size: CGSize(width: 320,height: 300))
                 self.topImage.setImage(imgUrl,placeHolder: UIImage(named: "avatar.png"))
                 self.topImage.contentMode = UIViewContentMode.ScaleAspectFill
                 self.topImage.clipsToBounds = true
-                self.webView.scrollView.addSubview(self.topImage)
+                self.webView!.scrollView.addSubview(self.topImage)
                 
-                var shadowImg:UIImageView = UIImageView()
+                let shadowImg:UIImageView = UIImageView()
                 shadowImg.frame = CGRect(origin: CGPoint(x: 0,y: 120),size: CGSize(width: 320,height: 80))
                 shadowImg.image = UIImage(named:"shadow.png")
-                self.webView.scrollView.addSubview(shadowImg)
+                self.webView!.scrollView.addSubview(shadowImg)
                 
                 var titleLbl:UILabel = UILabel()
                 titleLbl.textColor = UIColor.whiteColor()
                 titleLbl.font = UIFont.boldSystemFontOfSize(16)
                 titleLbl.numberOfLines = 0
                 titleLbl.lineBreakMode = NSLineBreakMode.ByCharWrapping
-                titleLbl.text = data["title"] as? String
+                titleLbl.text = (data["title"] as! String)
                 titleLbl.frame = CGRect(origin: CGPoint(x: 10,y: 130),size: CGSize(width: 300,height: 50))
-                self.webView.scrollView.addSubview(titleLbl)
+                self.webView!.scrollView.addSubview(titleLbl)
                 
                 var copyLbl:UILabel = UILabel()
                 var copy = data["image_source"]
@@ -79,7 +79,7 @@ class DetailViewController: UIViewController,UIScrollViewDelegate {
                 copyLbl.text = "图片：\(copy)"
                 copyLbl.frame = CGRect(origin: CGPoint(x: 10,y: 180),size: CGSize(width: 300,height: 10))
                 copyLbl.textAlignment = NSTextAlignment.Right
-                self.webView.scrollView.addSubview(copyLbl)
+                self.webView!.scrollView.addSubview(copyLbl)
             }
             
             
@@ -89,21 +89,21 @@ class DetailViewController: UIViewController,UIScrollViewDelegate {
             
             body = "<link href='\(cssUrl)' rel='stylesheet' type='text/css' />\(body)"
             
-            self.webView.loadHTMLString(body, baseURL:nil )
+            self.webView!.loadHTMLString(body, baseURL:nil )
             
         })
         
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView)
+    func scrollViewDidScroll(scrollView: UIScrollView!)
     {
-        var yOffset = self.webView.scrollView.contentOffset.y
+        var yOffset = self.webView!.scrollView.contentOffset.y
         updateOffsets()
     }
     
     func updateOffsets() {
-        var yOffset   = self.webView.scrollView.contentOffset.y
-        var threshold = kImageHeight - kInWindowHeight
+        let yOffset   = self.webView!.scrollView.contentOffset.y
+        let threshold = CGFloat(kImageHeight - kInWindowHeight)
         
         if Double(yOffset) > Double(-threshold) && Double(yOffset) < -64 {
             self.topImage.frame = CGRect(origin: CGPoint(x: 0,y: -100+yOffset/2),size: CGSize(width: 320,height: 300-yOffset/2));

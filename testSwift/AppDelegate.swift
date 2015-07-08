@@ -12,23 +12,21 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
                             
     var window: UIWindow?
-
-
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         // Override point for customization after application launch.
         
-        var homeCtrl = HomeViewController(nibName:"HomeViewController",bundle:nil)
-        var homeNav = UINavigationController(rootViewController:homeCtrl)
+        let homeCtrl = HomeViewController(nibName:"HomeViewController",bundle:nil)
+        let homeNav = UINavigationController(rootViewController:homeCtrl)
         
         homeNav.navigationBar.tintColor = UIColor.whiteColor()
         homeNav.navigationBar.barTintColor = UIColor(red: 0/255.0, green: 176/255.0, blue: 232/255.0, alpha: 1.0)
         
-        var titleAttr = [UIColor.whiteColor() : NSForegroundColorAttributeName]
-        homeNav.navigationBar.titleTextAttributes = titleAttr
+        let titleAttr:NSDictionary = NSDictionary(object:UIColor.whiteColor(),forKey:NSForegroundColorAttributeName)
+        homeNav.navigationBar.titleTextAttributes = titleAttr as? [String : AnyObject]
         
         self.window!.rootViewController = homeNav
-      
+        
         self.window!.backgroundColor = UIColor.whiteColor()
         self.window!.makeKeyAndVisible()
         return true

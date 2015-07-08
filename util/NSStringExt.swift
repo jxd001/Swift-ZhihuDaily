@@ -10,31 +10,31 @@ import Foundation
 
 extension String {
    
-    func stringHeightWith(fontSize:Float,width:Float)->Float
+    func stringHeightWith(fontSize:CGFloat,width:CGFloat)->CGFloat
     {
-        var font = UIFont.systemFontOfSize(CGFloat(fontSize))
-        var size = CGSizeMake(CGFloat(width),CGFloat.max)
+        let font = UIFont.systemFontOfSize(fontSize)
+        let size = CGSizeMake(width,CGFloat.max)
        // var attr = [font:NSFontAttributeName]
       
 
-        var paragraphStyle = NSMutableParagraphStyle()
+        let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineBreakMode = .ByWordWrapping;
-        var  attributes = [NSFontAttributeName:font,
+        let  attributes = [NSFontAttributeName:font,
             NSParagraphStyleAttributeName:paragraphStyle.copy()]
         
-        var text = self as NSString
-        var rect = text.boundingRectWithSize(size, options:.UsesLineFragmentOrigin, attributes: attributes, context:nil)
+        let text = self as NSString
+        let rect = text.boundingRectWithSize(size, options:.UsesLineFragmentOrigin, attributes: attributes, context:nil)
       
-        return Float(rect.size.height)
+        return (rect.size.height)
         
     }
     
     func dateStringFromTimestamp(timeStamp:NSString)->String
     {
-        var ts = timeStamp.doubleValue
+        let ts = timeStamp.doubleValue
         
         //var date = NSDate.timeIntervalSince1970: NSTimeInterval { get }
-        var  formatter = NSDateFormatter ()
+        let  formatter = NSDateFormatter ()
         formatter.dateFormat = "yyyy年MM月dd日 HH:MM:ss"
 //        var date = formatter.dateFromString(timeStamp)
 //        println(date)
@@ -45,7 +45,7 @@ extension String {
 //        NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
 //        NSLog(@"confromTimespStr =  %@",confromTimespStr);
         
-        var date = NSDate(timeIntervalSince1970 : ts)
+        let date = NSDate(timeIntervalSince1970 : ts)
          return  formatter.stringFromDate(date)
         
     }
