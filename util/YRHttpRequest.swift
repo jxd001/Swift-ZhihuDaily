@@ -21,28 +21,34 @@ class YRHttpRequest: NSObject {
     
     class func requestWithURL(urlString:String,completionHandler:(data:AnyObject)->Void)
     {
-        var URL = NSURL(string: urlString)
-        var req = NSMutableURLRequest(URL: URL!)
+        let URL = NSURL(string:urlString)
+        let req = NSMutableURLRequest(URL:URL!)
         req.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:29.0) Gecko/20100101 Firefox/29.0",forHTTPHeaderField:"User-Agent")
-        var queue = NSOperationQueue();
+        let queue = NSOperationQueue();
         NSURLConnection.sendAsynchronousRequest(req, queue: queue, completionHandler: { response, data, error in
             if (error != nil)
             {
                 dispatch_async(dispatch_get_main_queue(),
                 {
-                    println(error)
+                    print(error)
                     completionHandler(data:NSNull())
                 })
             }
             else
             {
-                var err:NSError?
-                let jsonData = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as! NSDictionary
+                do {
+                    if let jsonData = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary{
+                        dispatch_async(dispatch_get_main_queue(),
+                        {
+                            completionHandler(data:jsonData)
+                        })
+                    }
+                } catch let parseError {
+                    print(parseError)                                                          // Log the error thrown by `JSONObjectWithData`
+                    let jsonStr = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                    print("Error could not parse JSON: '\(jsonStr)'")
+                }
 
-                dispatch_async(dispatch_get_main_queue(),
-                {
-                    completionHandler(data:jsonData)
-                })
             }
         })
     }
