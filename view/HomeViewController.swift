@@ -237,12 +237,12 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
         return 44;//NavigationBar Height
     }
     
-<<<<<<< HEAD
+
     
     //MARK:
     //MARK:------slidescroll delegate
     
-=======
+
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
         let lbl = UILabel(frame:CGRectMake(0,0,320,44))
@@ -260,7 +260,7 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
             loadData()
         }
     }
->>>>>>> origin/master
+
     func SlideScrollViewDidClicked(index:Int)
     {
         if index == 0 {return} // when you click scrollview too soon after the view is presented
