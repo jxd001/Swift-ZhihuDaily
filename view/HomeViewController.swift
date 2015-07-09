@@ -8,6 +8,18 @@
 
 import UIKit
 
+let WINDOW_HEIGHT = UIScreen.mainScreen().bounds.size.height
+let WINDOW_WIDTH  = UIScreen.mainScreen().bounds.size.width
+let identifier = "cell"
+
+let url = "http://news-at.zhihu.com/api/4/stories/latest?client=0"
+let continueUrl = "http://news-at.zhihu.com/api/4/stories/before/"
+
+let launchImgUrl = "https://news-at.zhihu.com/api/4/start-image/640*1136?client=0"
+
+let kImageHeight:Float = 400
+let kInWindowHeight:Float = 200
+
 class HomeViewController: UIViewController,SlideScrollViewDelegate {
 
 
@@ -21,16 +33,7 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
     
     var bloading = false;
     
-    let identifier = "cell"
-//    let url = "https://news-at.zhihu.com/api/3/news/latest"
-    let url = "http://news-at.zhihu.com/api/4/stories/latest?client=0"
-    let continueUrl = "http://news-at.zhihu.com/api/4/stories/before/"
-//    let launchImgUrl = "https://news-at.zhihu.com/api/3/start-image/640*960"
-    let launchImgUrl = "https://news-at.zhihu.com/api/4/start-image/640*1136?client=0";
-    var dateString = "";
-    
-    let kImageHeight:Float = 400
-    let kInWindowHeight:Float = 200
+    var dateString = ""
     
     //MARK:-
     
@@ -115,7 +118,8 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
             let imgUrl = data["img"] as! String
             
             let height = UIScreen.mainScreen().bounds.size.height
-            let img = UIImageView(frame:CGRectMake(0, 0, 320, height))
+            let width = UIScreen.mainScreen().bounds.size.width
+            let img = UIImageView(frame:CGRectMake(0, 0, width, height))
             img.backgroundColor = UIColor.blackColor()
             img.contentMode = UIViewContentMode.ScaleAspectFit
             
@@ -123,7 +127,7 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
             window!.addSubview(img)
             img.setImage(imgUrl,placeHolder:nil)
             
-            let lbl = UILabel(frame:CGRectMake(0,height-50,320,20))
+            let lbl = UILabel(frame:CGRectMake(0,height-50,width,20))
             lbl.backgroundColor = UIColor.clearColor()
             lbl.text = data["text"] as? String
             lbl.textColor = UIColor.lightGrayColor()
@@ -133,7 +137,7 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
             
             UIView.animateWithDuration(3,animations:{
                 let height = UIScreen.mainScreen().bounds.size.height
-                let rect = CGRectMake(-100,-100,320+200,height+200)
+                let rect = CGRectMake(-100,-100,width+200,height+200)
                 img.frame = rect
                 },completion:{
                     (Bool completion) in
@@ -195,7 +199,8 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
             cell.clipsToBounds = true
             
             if self.slideImgArray.count > 0{
-                let slideRect = CGRect(origin:CGPoint(x:0,y:0),size:CGSize(width:320,height:CGFloat(self.kImageHeight)))
+                let width = UIScreen.mainScreen().bounds.size.height
+                let slideRect = CGRect(origin:CGPoint(x:0,y:0),size:CGSize(width:width,height:CGFloat(kImageHeight)))
                 
                 let slideView = SlideScrollView(frame: slideRect)
                 slideView.delegate = self
@@ -234,27 +239,28 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
         {
             return 0
         }
-        return 44;//NavigationBar Height
+        return 30 //NavigationBar Height
     }
     
 
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+    {
+        let lbl = UILabel(frame:CGRectMake(0,0,320,30))
+        lbl.backgroundColor = UIColor.lightGrayColor()
+        if(section > 0){
+            lbl.text = self.dataKey[section-1] as? String
+        }
+        lbl.textColor = UIColor.whiteColor()
+        lbl.textAlignment = NSTextAlignment.Center
+        lbl.font = UIFont.systemFontOfSize(14)
+        return lbl;
+    }
     
     //MARK:
     //MARK:------slidescroll delegate
     
 
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
-    {
-        let lbl = UILabel(frame:CGRectMake(0,0,320,44))
-        lbl.backgroundColor = UIColor.lightGrayColor()
-        if(section > 0){
-            lbl.text = self.dataKey[section-1] as? String
-        }
-        lbl.textColor = UIColor.darkTextColor()
-        lbl.textAlignment = NSTextAlignment.Center
-        lbl.font = UIFont.systemFontOfSize(14)
-        return lbl;
-    }
     func scrollViewDidScroll(scrollView: UIScrollView){
         if(scrollView.contentSize.height - scrollView.contentOffset.y - scrollView.frame.height < scrollView.frame.height/3){
             loadData()

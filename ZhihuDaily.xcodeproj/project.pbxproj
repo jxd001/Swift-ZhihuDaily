@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4D916EE91946151000E64BFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D916EE81946151000E64BFB /* AppDelegate.swift */; };
-		4D916EEB1946151000E64BFB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D916EEA1946151000E64BFB /* Images.xcassets */; };
+		4D276BC01B4E16F0001C2D24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D276BBD1B4E16F0001C2D24 /* AppDelegate.swift */; };
+		4D276BC11B4E16F0001C2D24 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D276BBE1B4E16F0001C2D24 /* Images.xcassets */; };
+		4D276BC21B4E16F0001C2D24 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D276BBF1B4E16F0001C2D24 /* Info.plist */; };
 		4D916F1319461B2600E64BFB /* FileUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D916F0D19461B2600E64BFB /* FileUtility.swift */; };
 		4D916F1419461B2600E64BFB /* NSDictionaryExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D916F0E19461B2600E64BFB /* NSDictionaryExt.swift */; };
 		4D916F1519461B2600E64BFB /* NSStringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D916F0F19461B2600E64BFB /* NSStringExt.swift */; };
@@ -28,10 +29,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4D276BBD1B4E16F0001C2D24 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4D276BBE1B4E16F0001C2D24 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../Images.xcassets; sourceTree = "<group>"; };
+		4D276BBF1B4E16F0001C2D24 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		4D916EE31946151000E64BFB /* ZhihuDaily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhihuDaily.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D916EE71946151000E64BFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4D916EE81946151000E64BFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = testSwift/AppDelegate.swift; sourceTree = "<group>"; };
-		4D916EEA1946151000E64BFB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4D916F0D19461B2600E64BFB /* FileUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtility.swift; sourceTree = "<group>"; };
 		4D916F0E19461B2600E64BFB /* NSDictionaryExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDictionaryExt.swift; sourceTree = "<group>"; };
 		4D916F0F19461B2600E64BFB /* NSStringExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSStringExt.swift; sourceTree = "<group>"; };
@@ -64,7 +65,7 @@
 		4D916EDA1946151000E64BFB = {
 			isa = PBXGroup;
 			children = (
-				4D916EE81946151000E64BFB /* AppDelegate.swift */,
+				4D276BBD1B4E16F0001C2D24 /* AppDelegate.swift */,
 				4D916F0A194619E000E64BFB /* model */,
 				4D916F0B194619E000E64BFB /* view */,
 				4D916F0C19461B2600E64BFB /* util */,
@@ -85,8 +86,8 @@
 		4D916EE61946151000E64BFB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4D916EEA1946151000E64BFB /* Images.xcassets */,
-				4D916EE71946151000E64BFB /* Info.plist */,
+				4D276BBE1B4E16F0001C2D24 /* Images.xcassets */,
+				4D276BBF1B4E16F0001C2D24 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			path = testSwift;
@@ -209,11 +210,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D276BC21B4E16F0001C2D24 /* Info.plist in Resources */,
 				4D91734D1947E83700E64BFB /* avatar.png in Resources */,
 				4D9173591948321E00E64BFB /* DetailViewController.xib in Resources */,
+				4D276BC11B4E16F0001C2D24 /* Images.xcassets in Resources */,
 				4D91735B194848F600E64BFB /* shadow.png in Resources */,
 				4D9173441946AC2000E64BFB /* HomeViewCell.xib in Resources */,
-				4D916EEB1946151000E64BFB /* Images.xcassets in Resources */,
 				4D9173401946AB1600E64BFB /* HomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,6 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D276BC01B4E16F0001C2D24 /* AppDelegate.swift in Sources */,
 				4D9173581948321E00E64BFB /* DetailViewController.swift in Sources */,
 				4D9173461946D7CB00E64BFB /* YYHRequest.swift in Sources */,
 				4D916F1719461B2600E64BFB /* UIViewExt.swift in Sources */,
@@ -234,7 +237,6 @@
 				4D91733F1946AB1600E64BFB /* HomeViewController.swift in Sources */,
 				4D916F1819461B2600E64BFB /* YRHttpRequest.swift in Sources */,
 				4D916F1519461B2600E64BFB /* NSStringExt.swift in Sources */,
-				4D916EE91946151000E64BFB /* AppDelegate.swift in Sources */,
 				4D916F1419461B2600E64BFB /* NSDictionaryExt.swift in Sources */,
 				4D9173431946AC2000E64BFB /* HomeViewCell.swift in Sources */,
 			);
@@ -336,7 +338,7 @@
 					"/Applications/Xcode6-Beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
 					/usr/include/libxml2,
 				);
-				INFOPLIST_FILE = testSwift/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = ZhihuDaily;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -359,7 +361,7 @@
 					"/Applications/Xcode6-Beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
 					/usr/include/libxml2,
 				);
-				INFOPLIST_FILE = testSwift/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = ZhihuDaily;
 				USER_HEADER_SEARCH_PATHS = "";
