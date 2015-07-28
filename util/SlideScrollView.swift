@@ -110,7 +110,7 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
 
         self.addSubview(noteView)
 
-//        var timer:NSTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "autoShowNextPage", userInfo: nil, repeats: true)
+        var timer:NSTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "autoShowNextPage", userInfo: nil, repeats: true)
         
         return self
     }
