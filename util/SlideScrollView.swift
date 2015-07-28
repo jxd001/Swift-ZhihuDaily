@@ -127,7 +127,7 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
     }
     
     func changeCurrentPage (){
-        var offX = scrollView.frame.size.width * CGFloat(currentPageIndex+1)
+        let offX = scrollView.frame.size.width * CGFloat(currentPageIndex+1)
         scrollView.setContentOffset(CGPoint(x:offX, y:scrollView.frame.origin.y), animated:true)
         self.scrollViewDidScroll(scrollView);
     }

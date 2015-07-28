@@ -20,7 +20,7 @@ extension NSDictionary {
         }
         if obj.isKindOfClass(NSNumber)
         {
-            var num = obj as! NSNumber
+            let num = obj as! NSNumber
             return num.stringValue
         }
        return obj as! String

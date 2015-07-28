@@ -25,7 +25,7 @@ extension UIImageView
         }
         else
         {
-            var req = NSURLRequest(URL: url!)
+            let req = NSURLRequest(URL: url!)
             let queue = NSOperationQueue();
             NSURLConnection.sendAsynchronousRequest(req, queue: queue, completionHandler: { response, data, error in
                 if (error != nil)
