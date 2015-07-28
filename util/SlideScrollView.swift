@@ -30,20 +30,18 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
    
     func initWithFrameRect(rect:CGRect,imgArr:NSArray,titArr:NSArray)->AnyObject{
         
-        var view:UIView = UIView(frame:rect)
-        
         self.userInteractionEnabled=true;
         
-        var tempArray:NSMutableArray=NSMutableArray(array: imgArr);
+        let tempArray:NSMutableArray=NSMutableArray(array: imgArr);
         tempArray.insertObject(imgArr[imgArr.count-1], atIndex:0)
         tempArray.addObject(imgArr[0])
         imageArray=NSArray(array:tempArray)
         titleArray=NSArray(array:titArr)
         viewSize=rect;
-        var pageCount:Int=imageArray.count
+        let pageCount:Int=imageArray.count
         scrollView=UIScrollView(frame:CGRect(origin: CGPoint(x: 0,y: 0),size: CGSize(width: viewSize.size.width,height: viewSize.size.height)))
         scrollView.pagingEnabled = true
-        var contentWidth = 320*pageCount
+//        var contentWidth = 320*pageCount
         
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
@@ -54,10 +52,10 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         scrollView.delegate = self
         
         for var i=0; i<pageCount; i++ {
-            var imgURL:String=imageArray[i] as! String
-            var imgView:UIImageView=UIImageView()
+            let imgURL:String=imageArray[i] as! String
+            let imgView:UIImageView=UIImageView()
             
-            var viewWidth = Int(viewSize.size.width)*i
+            let viewWidth = Int(viewSize.size.width)*i
             imgView.frame = CGRect(origin: CGPoint(x: CGFloat(viewWidth), y:CGFloat(0)),size: CGSize(width: viewSize.size.width,height: viewSize.size.height))
 
             imgView.setImage(imgURL,placeHolder: UIImage(named: "avatar.png"))
@@ -66,7 +64,7 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
 
             imgView.tag = i
             
-            var tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "imagePressed:")
+            let tap = UITapGestureRecognizer(target: self, action: "imagePressed:")
 
             tap.numberOfTapsRequired = 1
             tap.numberOfTouchesRequired = 1
@@ -79,9 +77,9 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         self.addSubview(scrollView)
 
         //文字层
-        var myHeight:CGFloat = 24;
+        let myHeight:CGFloat = 24;
         
-        var shadowImg:UIImageView = UIImageView()
+        let shadowImg:UIImageView = UIImageView()
         shadowImg.frame = CGRect(origin: CGPoint(x: 0,y: 130),size: CGSize(width: 320,height: 80))
         shadowImg.image = UIImage(named:"shadow.png")
         self.addSubview(shadowImg)
@@ -112,7 +110,7 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
 
         self.addSubview(noteView)
 
-        var timer:NSTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "autoShowNextPage", userInfo: nil, repeats: true)
+//        var timer:NSTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "autoShowNextPage", userInfo: nil, repeats: true)
         
         return self
     }

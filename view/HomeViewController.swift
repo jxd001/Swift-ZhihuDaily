@@ -51,7 +51,7 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
         
-        var nib = UINib(nibName:"HomeViewCell", bundle: nil)
+        let nib = UINib(nibName:"HomeViewCell", bundle: nil)
         self.tableView?.registerNib(nib, forCellReuseIdentifier: identifier)
         
         self.edgesForExtendedLayout = UIRectEdge.Top

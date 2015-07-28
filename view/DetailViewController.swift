@@ -97,7 +97,7 @@ class DetailViewController: UIViewController,UIScrollViewDelegate {
     
     func scrollViewDidScroll(scrollView: UIScrollView!)
     {
-        var yOffset = self.webView!.scrollView.contentOffset.y
+//        var yOffset = self.webView!.scrollView.contentOffset.y
         updateOffsets()
     }
     

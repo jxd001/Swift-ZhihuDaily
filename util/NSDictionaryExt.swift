@@ -13,7 +13,7 @@ extension NSDictionary {
     
     func stringAttributeForKey(key:String)->String
     {
-        var obj : AnyObject! = self[key]
+        let obj : AnyObject! = self[key]
         if obj as! NSObject == NSNull()
         {
             return ""

@@ -14,7 +14,7 @@ class FileUtility: NSObject {
     class func cachePath(fileName:String)->String
     {
       var arr =  NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)
-       let path = arr[0] as! String
+       let path = arr[0] as String
         return "\(path)/\(fileName)"
     }
     
