@@ -33,12 +33,12 @@
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                     <view hidden="YES" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="msO-Rk-HGS" userLabel="multi pic bg View">
-                        <rect key="frame" x="265" y="65" width="35" height="21"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <rect key="frame" x="265" y="70" width="35" height="16"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="多图" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nmm-c3-u1b" userLabel="multi pic Label">
-                        <rect key="frame" x="265" y="66" width="35" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="多图" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nmm-c3-u1b" userLabel="multi pic Label">
+                        <rect key="frame" x="265" y="71" width="35" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -48,14 +48,14 @@
                     <constraint firstItem="msO-Rk-HGS" firstAttribute="leading" secondItem="g0d-dB-PjN" secondAttribute="centerX" id="4K6-b5-Ang"/>
                     <constraint firstItem="nmm-c3-u1b" firstAttribute="trailing" secondItem="msO-Rk-HGS" secondAttribute="trailing" id="5pa-0P-yah"/>
                     <constraint firstItem="dEr-YZ-ChI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="6" id="7hM-hM-hRW"/>
-                    <constraint firstItem="nmm-c3-u1b" firstAttribute="bottom" secondItem="msO-Rk-HGS" secondAttribute="bottom" id="INz-Zq-3bJ"/>
+                    <constraint firstItem="nmm-c3-u1b" firstAttribute="bottom" secondItem="msO-Rk-HGS" secondAttribute="bottom" constant="1" id="INz-Zq-3bJ"/>
                     <constraint firstItem="g0d-dB-PjN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="12" id="OIc-Cm-O2M"/>
                     <constraint firstAttribute="trailingMargin" secondItem="g0d-dB-PjN" secondAttribute="trailing" constant="12" id="Q9n-Dn-Yl4"/>
                     <constraint firstItem="msO-Rk-HGS" firstAttribute="trailing" secondItem="g0d-dB-PjN" secondAttribute="trailing" id="Sii-YS-MSX"/>
                     <constraint firstItem="nmm-c3-u1b" firstAttribute="leading" secondItem="msO-Rk-HGS" secondAttribute="leading" id="T6s-Lg-Wkp"/>
                     <constraint firstItem="dEr-YZ-ChI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="bFs-me-yv2"/>
                     <constraint firstItem="msO-Rk-HGS" firstAttribute="bottom" secondItem="g0d-dB-PjN" secondAttribute="bottom" id="jVu-a8-7eW"/>
-                    <constraint firstItem="nmm-c3-u1b" firstAttribute="top" secondItem="msO-Rk-HGS" secondAttribute="top" id="pGD-be-gSN"/>
+                    <constraint firstItem="nmm-c3-u1b" firstAttribute="top" secondItem="msO-Rk-HGS" secondAttribute="top" constant="1" id="pGD-be-gSN"/>
                 </constraints>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>

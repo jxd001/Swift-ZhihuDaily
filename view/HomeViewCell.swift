@@ -39,16 +39,15 @@ class HomeViewCell: UITableViewCell {
         let thumbUrl = thumbArr[0] as! String
         
         self.thumbImage.setImage(thumbUrl,placeHolder: UIImage(named: "avatar.png"))
+        
+        multiPicBg.hidden = true
+        multiPicLabel.hidden = true
         if let bMultiPic:Bool = dic["multipic"] as? Bool
         {
             if bMultiPic{
                 multiPicBg.hidden = false
                 multiPicLabel.hidden = false
-            }else{
-                multiPicBg.hidden = true
-                multiPicLabel.hidden = true
             }
-            
         }
     }
 }
