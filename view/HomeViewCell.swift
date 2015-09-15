@@ -12,7 +12,9 @@ class HomeViewCell: UITableViewCell {
     
     @IBOutlet var thumbImage : UIImageView!
     @IBOutlet var titleTextView : UITextView!
-
+    @IBOutlet weak var multiPicBg: UIView!
+    @IBOutlet weak var multiPicLabel: UILabel!
+    
     var data:NSDictionary?
 
     override func awakeFromNib() {
@@ -29,13 +31,24 @@ class HomeViewCell: UITableViewCell {
     override func layoutSubviews()
     {
         super.layoutSubviews()
-        var dic:NSDictionary = self.data!
+        let dic:NSDictionary = self.data!
         
         self.titleTextView.text = dic["title"] as! String
         
-        var thumbArr = dic["images"] as! NSArray
-        var thumbUrl = thumbArr[0] as! String
+        if let thumbArr = dic["images"] as? NSArray
+        {
+            let thumbUrl = thumbArr[0] as! String
+            self.thumbImage.setImage(thumbUrl,placeHolder: UIImage(named: "avatar.png"))
+        }
         
-        self.thumbImage.setImage(thumbUrl,placeHolder: UIImage(named: "avatar.png"))
+        multiPicBg.hidden = true
+        multiPicLabel.hidden = true
+        if let bMultiPic:Bool = dic["multipic"] as? Bool
+        {
+            if bMultiPic{
+                multiPicBg.hidden = false
+                multiPicLabel.hidden = false
+            }
+        }
     }
 }

@@ -46,7 +46,7 @@ class DetailViewController: UIViewController,UIScrollViewDelegate {
                 return
             }
             
-            var type = data["type"] as! Int
+//            var type = data["type"] as! Int
             
             let keys = data.allKeys as NSArray
             if keys.containsObject("image")
@@ -63,7 +63,7 @@ class DetailViewController: UIViewController,UIScrollViewDelegate {
                 shadowImg.image = UIImage(named:"shadow.png")
                 self.webView!.scrollView.addSubview(shadowImg)
                 
-                var titleLbl:UILabel = UILabel()
+                let titleLbl:UILabel = UILabel()
                 titleLbl.textColor = UIColor.whiteColor()
                 titleLbl.font = UIFont.boldSystemFontOfSize(16)
                 titleLbl.numberOfLines = 0
@@ -72,8 +72,8 @@ class DetailViewController: UIViewController,UIScrollViewDelegate {
                 titleLbl.frame = CGRect(origin: CGPoint(x: 10,y: 130),size: CGSize(width: 300,height: 50))
                 self.webView!.scrollView.addSubview(titleLbl)
                 
-                var copyLbl:UILabel = UILabel()
-                var copy = data["image_source"]
+                let copyLbl:UILabel = UILabel()
+                let copy = data["image_source"]
                 copyLbl.textColor = UIColor.lightGrayColor()
                 copyLbl.font = UIFont(name: "Arial",size:10)
                 copyLbl.text = "图片：\(copy)"
@@ -84,8 +84,8 @@ class DetailViewController: UIViewController,UIScrollViewDelegate {
             
             
             var body = data["body"] as! String
-            var css = data["css"] as! NSArray
-            var cssUrl = css[0] as! String
+            let css = data["css"] as! NSArray
+            let cssUrl = css[0] as! String
             
             body = "<link href='\(cssUrl)' rel='stylesheet' type='text/css' />\(body)"
             
@@ -95,9 +95,9 @@ class DetailViewController: UIViewController,UIScrollViewDelegate {
         
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView!)
+    func scrollViewDidScroll(scrollView: UIScrollView)
     {
-        var yOffset = self.webView!.scrollView.contentOffset.y
+//        var yOffset = self.webView!.scrollView.contentOffset.y
         updateOffsets()
     }
     

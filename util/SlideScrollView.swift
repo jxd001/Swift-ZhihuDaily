@@ -30,20 +30,18 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
    
     func initWithFrameRect(rect:CGRect,imgArr:NSArray,titArr:NSArray)->AnyObject{
         
-        var view:UIView = UIView(frame:rect)
-        
         self.userInteractionEnabled=true;
         
-        var tempArray:NSMutableArray=NSMutableArray(array: imgArr);
+        let tempArray:NSMutableArray=NSMutableArray(array: imgArr);
         tempArray.insertObject(imgArr[imgArr.count-1], atIndex:0)
         tempArray.addObject(imgArr[0])
         imageArray=NSArray(array:tempArray)
         titleArray=NSArray(array:titArr)
         viewSize=rect;
-        var pageCount:Int=imageArray.count
+        let pageCount:Int=imageArray.count
         scrollView=UIScrollView(frame:CGRect(origin: CGPoint(x: 0,y: 0),size: CGSize(width: viewSize.size.width,height: viewSize.size.height)))
         scrollView.pagingEnabled = true
-        var contentWidth = 320*pageCount
+//        var contentWidth = 320*pageCount
         
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
@@ -54,10 +52,10 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         scrollView.delegate = self
         
         for var i=0; i<pageCount; i++ {
-            var imgURL:String=imageArray[i] as! String
-            var imgView:UIImageView=UIImageView()
+            let imgURL:String=imageArray[i] as! String
+            let imgView:UIImageView=UIImageView()
             
-            var viewWidth = Int(viewSize.size.width)*i
+            let viewWidth = Int(viewSize.size.width)*i
             imgView.frame = CGRect(origin: CGPoint(x: CGFloat(viewWidth), y:CGFloat(0)),size: CGSize(width: viewSize.size.width,height: viewSize.size.height))
 
             imgView.setImage(imgURL,placeHolder: UIImage(named: "avatar.png"))
@@ -66,7 +64,7 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
 
             imgView.tag = i
             
-            var tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "imagePressed:")
+            let tap = UITapGestureRecognizer(target: self, action: "imagePressed:")
 
             tap.numberOfTapsRequired = 1
             tap.numberOfTouchesRequired = 1
@@ -79,9 +77,9 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
         self.addSubview(scrollView)
 
         //文字层
-        var myHeight:CGFloat = 24;
+        let myHeight:CGFloat = 24;
         
-        var shadowImg:UIImageView = UIImageView()
+        let shadowImg:UIImageView = UIImageView()
         shadowImg.frame = CGRect(origin: CGPoint(x: 0,y: 130),size: CGSize(width: 320,height: 80))
         shadowImg.image = UIImage(named:"shadow.png")
         self.addSubview(shadowImg)
@@ -112,7 +110,7 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
 
         self.addSubview(noteView)
 
-        var timer:NSTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "autoShowNextPage", userInfo: nil, repeats: true)
+        let _:NSTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "autoShowNextPage", userInfo: nil, repeats: true)
         
         return self
     }
@@ -129,22 +127,21 @@ class SlideScrollView: UIView,UIScrollViewDelegate {
     }
     
     func changeCurrentPage (){
-        var offX = scrollView.frame.size.width * CGFloat(currentPageIndex+1)
+        let offX = scrollView.frame.size.width * CGFloat(currentPageIndex+1)
         scrollView.setContentOffset(CGPoint(x:offX, y:scrollView.frame.origin.y), animated:true)
         self.scrollViewDidScroll(scrollView);
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        //感觉swift算数运算的时候好麻烦啊，一个运算里必须要所有的值都保持一致才行，所以一个运算才变成了下面这一大段难看的代码，本来应该是这样的：
-        // var page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1
-        //应该是我没搞明白swift的真谛吧，我不相信有这么麻烦，求大神指教啊
+        let pageWidth = scrollView.frame.size.width;
+        let page:Int = Int(floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth)) + 1
 
-        let pageWidth:Int = Int(scrollView.frame.size.width)
-        let offX:Int = Int(scrollView.contentOffset.x)
-        let a = offX - pageWidth / 2 as Int
-        let b = a / pageWidth as Int
-        let c = floor(Double(b))
-        let page:Int = Int(c) + 1
+//        let pageWidth:Int = Int(scrollView.frame.size.width)
+//        let offX:Int = Int(scrollView.contentOffset.x)
+//        let a = offX - pageWidth / 2 as Int
+//        let b = a / pageWidth as Int
+//        let c = floor(Double(b))
+//        let page:Int = Int(c) + 1
         
         currentPageIndex=page
         pageControl.currentPage=(page-1)

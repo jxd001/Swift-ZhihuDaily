@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8121.20" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.16"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -12,7 +13,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="106"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="106"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g0d-dB-PjN">
@@ -31,17 +32,36 @@
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
+                    <view hidden="YES" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="msO-Rk-HGS" userLabel="multi pic bg View">
+                        <rect key="frame" x="265" y="70" width="35" height="16"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="多图" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nmm-c3-u1b" userLabel="multi pic Label">
+                        <rect key="frame" x="265" y="71" width="35" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="dEr-YZ-ChI" secondAttribute="trailing" constant="96" id="2Ps-Xv-YNP"/>
+                    <constraint firstItem="msO-Rk-HGS" firstAttribute="leading" secondItem="g0d-dB-PjN" secondAttribute="centerX" id="4K6-b5-Ang"/>
+                    <constraint firstItem="nmm-c3-u1b" firstAttribute="trailing" secondItem="msO-Rk-HGS" secondAttribute="trailing" id="5pa-0P-yah"/>
                     <constraint firstItem="dEr-YZ-ChI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="6" id="7hM-hM-hRW"/>
+                    <constraint firstItem="nmm-c3-u1b" firstAttribute="bottom" secondItem="msO-Rk-HGS" secondAttribute="bottom" constant="1" id="INz-Zq-3bJ"/>
                     <constraint firstItem="g0d-dB-PjN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="12" id="OIc-Cm-O2M"/>
                     <constraint firstAttribute="trailingMargin" secondItem="g0d-dB-PjN" secondAttribute="trailing" constant="12" id="Q9n-Dn-Yl4"/>
+                    <constraint firstItem="msO-Rk-HGS" firstAttribute="trailing" secondItem="g0d-dB-PjN" secondAttribute="trailing" id="Sii-YS-MSX"/>
+                    <constraint firstItem="nmm-c3-u1b" firstAttribute="leading" secondItem="msO-Rk-HGS" secondAttribute="leading" id="T6s-Lg-Wkp"/>
                     <constraint firstItem="dEr-YZ-ChI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="bFs-me-yv2"/>
+                    <constraint firstItem="msO-Rk-HGS" firstAttribute="bottom" secondItem="g0d-dB-PjN" secondAttribute="bottom" id="jVu-a8-7eW"/>
+                    <constraint firstItem="nmm-c3-u1b" firstAttribute="top" secondItem="msO-Rk-HGS" secondAttribute="top" constant="1" id="pGD-be-gSN"/>
                 </constraints>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
             <connections>
+                <outlet property="multiPicBg" destination="msO-Rk-HGS" id="WU8-Ph-34o"/>
+                <outlet property="multiPicLabel" destination="nmm-c3-u1b" id="hYi-fR-UbD"/>
                 <outlet property="thumbImage" destination="g0d-dB-PjN" id="VUH-Ut-Uuh"/>
                 <outlet property="titleTextView" destination="dEr-YZ-ChI" id="z2d-pz-Atl"/>
             </connections>
