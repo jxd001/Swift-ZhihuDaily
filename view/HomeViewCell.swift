@@ -35,10 +35,11 @@ class HomeViewCell: UITableViewCell {
         
         self.titleTextView.text = dic["title"] as! String
         
-        let thumbArr = dic["images"] as! NSArray
-        let thumbUrl = thumbArr[0] as! String
-        
-        self.thumbImage.setImage(thumbUrl,placeHolder: UIImage(named: "avatar.png"))
+        if let thumbArr = dic["images"] as? NSArray
+        {
+            let thumbUrl = thumbArr[0] as! String
+            self.thumbImage.setImage(thumbUrl,placeHolder: UIImage(named: "avatar.png"))
+        }
         
         multiPicBg.hidden = true
         multiPicLabel.hidden = true

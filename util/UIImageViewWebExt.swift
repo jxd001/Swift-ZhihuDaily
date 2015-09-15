@@ -21,7 +21,7 @@ extension UIImageView
       //  println(cachePath)
         if image as! NSObject != NSNull()
         {
-            self.image = image as! UIImage
+            self.image = (image as! UIImage)
         }
         else
         {
