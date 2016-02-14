@@ -29,12 +29,12 @@ class HomeViewCell: UITableViewCell {
     override func layoutSubviews()
     {
         super.layoutSubviews()
-        var dic:NSDictionary = self.data!
+        let dic:NSDictionary = self.data!
         
         self.titleTextView.text = dic["title"] as! String
         
-        var thumbArr = dic["images"] as! NSArray
-        var thumbUrl = thumbArr[0] as! String
+        let thumbArr = dic["images"] as! NSArray
+        let thumbUrl = thumbArr[0] as! String
         
         self.thumbImage.setImage(thumbUrl,placeHolder: UIImage(named: "avatar.png"))
     }
