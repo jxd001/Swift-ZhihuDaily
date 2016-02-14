@@ -51,7 +51,7 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
         
-        var nib = UINib(nibName:"HomeViewCell", bundle: nil)
+        let nib = UINib(nibName:"HomeViewCell", bundle: nil)
         self.tableView?.registerNib(nib, forCellReuseIdentifier: identifier)
         
         self.edgesForExtendedLayout = UIRectEdge.Top
@@ -205,8 +205,7 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
                 let slideView = SlideScrollView(frame: slideRect)
                 slideView.delegate = self
                 slideView.initWithFrameRect(slideRect,imgArr:self.slideImgArray,titArr:self.slideTtlArray)
-//                self.view.addSubview(slideView)
-//                self.tableView.tableHeaderView = slideView
+
                 cell.addSubview(slideView)
             }
         }
@@ -224,12 +223,15 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!)
     {
         if indexPath!.section==0 {return}
+        
         tableView.deselectRowAtIndexPath(indexPath!,animated: true)
+        
         let index = indexPath!.row
         let array1 = self.dataFull[self.dataKey[(indexPath?.section)!-1] as! String] as! NSArray
         let data = array1[index] as! NSDictionary
         let detailCtrl = DetailViewController(nibName :"DetailViewController", bundle: nil)
         detailCtrl.aid = data["id"] as! Int
+        
         self.navigationController!.pushViewController(detailCtrl, animated: true)
     }
 
@@ -274,13 +276,6 @@ class HomeViewController: UIViewController,SlideScrollViewDelegate {
         let detailCtrl = DetailViewController(nibName :"DetailViewController", bundle: nil)
         detailCtrl.aid = data["id"] as! Int
         self.navigationController!.pushViewController(detailCtrl, animated: true)
-    }
-    
-    //MARK:
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 }
